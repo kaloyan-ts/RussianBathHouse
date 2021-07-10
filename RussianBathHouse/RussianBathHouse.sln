@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.31410.357
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RussianBathHouse", "RussianBathHouse\RussianBathHouse.csproj", "{0AC5D03E-A93A-46F3-818E-255416EE795B}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RussianBathHouse.Data", "RussanBathHouse.Data\RussianBathHouse.Data.csproj", "{EEB042A7-FB5E-44C0-AAD5-7DA9CCF9F33F}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{0AC5D03E-A93A-46F3-818E-255416EE795B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0AC5D03E-A93A-46F3-818E-255416EE795B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0AC5D03E-A93A-46F3-818E-255416EE795B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0AC5D03E-A93A-46F3-818E-255416EE795B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{EEB042A7-FB5E-44C0-AAD5-7DA9CCF9F33F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EEB042A7-FB5E-44C0-AAD5-7DA9CCF9F33F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EEB042A7-FB5E-44C0-AAD5-7DA9CCF9F33F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EEB042A7-FB5E-44C0-AAD5-7DA9CCF9F33F}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {F0CF3605-2F4D-4F5F-906B-AD8E46BFEFC0}
+	EndGlobalSection
+EndGlobal

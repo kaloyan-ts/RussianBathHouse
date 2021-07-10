@@ -1,0 +1,26 @@
+﻿@model List<AccessoriesAllViewModel>
+@using RussianBathHouse.Models.Accessories
+
+<div class="container">
+    <a class="btn btn-primary btn-block" asp-controller="Accessories" asp-action="Add" role="button">Add Accessory</a>
+    <h6 class="text-muted">Accessories</h6>
+    <div class="card-group">
+        @foreach (var accessory in Model)
+        {
+            <div class="card">
+                <img class="card-img-top" src=@accessory.Image alt="Card image cap">
+                <div class="card-body">
+                    <h5 class="card-title">@accessory.Name</h5>
+                    <p class="card-text">@accessory.Description</p>
+                </div>
+                <ul class="list-group list-group-flush">
+                    <li class="list-group-item">Quantity: @accessory.QuantityLeft</li>
+                    <li class="list-group-item">Price: @accessory.Price $</li>
+                </ul>
+                <a type="button" role="button" class="btn btn-primary btn-sm" asp-action="Delete" asp-route-id="@accessory.Id">Delete</a>
+            </div>
+
+        }
+    </div>
+</div>
+
