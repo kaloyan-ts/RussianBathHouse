@@ -1,6 +1,8 @@
 ﻿namespace RussianBathHouse.Data.Models
 {
     using System;
+    using System.Collections.Generic;
+
     public class Reservation
     {
         public string Id { get; set; } = Guid.NewGuid().ToString();
@@ -14,5 +16,7 @@
         public DateTime ReservedFrom { get; set; }
 
         public DateTime ReservedUntill { get; set; }
+
+        public ICollection<Service> Services{ get; set; }
     }
 }

@@ -20,6 +20,7 @@
             dbContext.Database.Migrate();
 
             SeedCabins(dbContext);
+            SeedServices(dbContext);
 
             return app;
         }
@@ -52,6 +53,40 @@
                 {
                     Capacity  = 6,
                     PricePerHour = 40,
+                }
+            });
+
+            data.SaveChanges();
+        }
+
+        private static void SeedServices(BathHouseDbContext data)
+        {
+            if (data.Services.Any())
+            {
+                return;
+            }
+
+            data.Services.AddRange(new[]
+            {
+                new Service
+                {
+                     Description ="Traditional parenie by a Bannik",
+                     Price = 10
+                },
+                new Service
+                {
+                   Description ="Luxury organic body scrub",
+                     Price = 20
+                },
+                new Service
+                {
+                    Description ="Classical Russian Massage",
+                     Price = 50
+                },
+                new Service
+                {
+                    Description ="Body Scrub",
+                     Price = 40
                 }
             });
 

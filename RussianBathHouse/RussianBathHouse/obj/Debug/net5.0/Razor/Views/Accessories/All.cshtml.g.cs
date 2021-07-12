@@ -27,6 +27,13 @@ using RussianBathHouse.Models;
 #line hidden
 #nullable disable
 #nullable restore
+#line 4 "D:\Kaloyan\asp.net project identity\RussianBathHouse\RussianBathHouse\Views\_ViewImports.cshtml"
+using RussianBathHouse.Models.Reservations;
+
+#line default
+#line hidden
+#nullable disable
+#nullable restore
 #line 2 "D:\Kaloyan\asp.net project identity\RussianBathHouse\RussianBathHouse\Views\Accessories\All.cshtml"
 using RussianBathHouse.Models.Accessories;
 
@@ -34,7 +41,7 @@ using RussianBathHouse.Models.Accessories;
 #line hidden
 #nullable disable
     [global::Microsoft.AspNetCore.Razor.Hosting.RazorSourceChecksumAttribute(@"SHA1", @"a6b99824e70058e5d467e19c5934ec37858cb4b3", @"/Views/Accessories/All.cshtml")]
-    [global::Microsoft.AspNetCore.Razor.Hosting.RazorSourceChecksumAttribute(@"SHA1", @"9b40ac154da5c10c8f967ceb92e5cdba67ec83e5", @"/Views/_ViewImports.cshtml")]
+    [global::Microsoft.AspNetCore.Razor.Hosting.RazorSourceChecksumAttribute(@"SHA1", @"4b0e0b896c41868002ed0d92ddfe2c90e260c1b2", @"/Views/_ViewImports.cshtml")]
     public class Views_Accessories_All : global::Microsoft.AspNetCore.Mvc.Razor.RazorPage<List<AccessoriesAllViewModel>>
     {
         private static readonly global::Microsoft.AspNetCore.Razor.TagHelpers.TagHelperAttribute __tagHelperAttribute_0 = new global::Microsoft.AspNetCore.Razor.TagHelpers.TagHelperAttribute("class", new global::Microsoft.AspNetCore.Html.HtmlString("btn btn-primary btn-block"), global::Microsoft.AspNetCore.Razor.TagHelpers.HtmlAttributeValueStyle.DoubleQuotes);
@@ -70,7 +77,7 @@ using RussianBathHouse.Models.Accessories;
         public async override global::System.Threading.Tasks.Task ExecuteAsync()
         {
             WriteLiteral("\r\n<div class=\"container\">\r\n    ");
-            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "a6b99824e70058e5d467e19c5934ec37858cb4b36049", async() => {
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "a6b99824e70058e5d467e19c5934ec37858cb4b36270", async() => {
                 WriteLiteral("Add Accessory");
             }
             );
@@ -141,7 +148,7 @@ WriteAttributeValue("", 428, accessory.Image, 428, 16, false);
 #line hidden
 #nullable disable
             WriteLiteral(" $</li>\r\n            </ul>\r\n            ");
-            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "a6b99824e70058e5d467e19c5934ec37858cb4b39902", async() => {
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "a6b99824e70058e5d467e19c5934ec37858cb4b310123", async() => {
                 WriteLiteral("Delete");
             }
             );
@@ -175,7 +182,7 @@ WriteAttributeValue("", 428, accessory.Image, 428, 16, false);
             Write(__tagHelperExecutionContext.Output);
             __tagHelperExecutionContext = __tagHelperScopeManager.End();
             WriteLiteral("\r\n            ");
-            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "a6b99824e70058e5d467e19c5934ec37858cb4b312393", async() => {
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "a6b99824e70058e5d467e19c5934ec37858cb4b312615", async() => {
                 WriteLiteral("Edit");
             }
             );

@@ -33,8 +33,15 @@ using RussianBathHouse.Models.Accessories;
 #line default
 #line hidden
 #nullable disable
+#nullable restore
+#line 4 "D:\Kaloyan\asp.net project identity\RussianBathHouse\RussianBathHouse\Views\_ViewImports.cshtml"
+using RussianBathHouse.Models.Reservations;
+
+#line default
+#line hidden
+#nullable disable
     [global::Microsoft.AspNetCore.Razor.Hosting.RazorSourceChecksumAttribute(@"SHA1", @"ede7bf0c7e0387d1f20b829fcfbba7df9a5c1fa0", @"/Views/Shared/AboutUsNavbar.cshtml")]
-    [global::Microsoft.AspNetCore.Razor.Hosting.RazorSourceChecksumAttribute(@"SHA1", @"9b40ac154da5c10c8f967ceb92e5cdba67ec83e5", @"/Views/_ViewImports.cshtml")]
+    [global::Microsoft.AspNetCore.Razor.Hosting.RazorSourceChecksumAttribute(@"SHA1", @"4b0e0b896c41868002ed0d92ddfe2c90e260c1b2", @"/Views/_ViewImports.cshtml")]
     public class Views_Shared_AboutUsNavbar : global::Microsoft.AspNetCore.Mvc.Razor.RazorPage<dynamic>
     {
         private static readonly global::Microsoft.AspNetCore.Razor.TagHelpers.TagHelperAttribute __tagHelperAttribute_0 = new global::Microsoft.AspNetCore.Razor.TagHelpers.TagHelperAttribute("class", new global::Microsoft.AspNetCore.Html.HtmlString("nav-link active"), global::Microsoft.AspNetCore.Razor.TagHelpers.HtmlAttributeValueStyle.DoubleQuotes);
@@ -69,7 +76,7 @@ using RussianBathHouse.Models.Accessories;
         public async override global::System.Threading.Tasks.Task ExecuteAsync()
         {
             WriteLiteral("\r\n<nav class=\"navbar navbar-light\" style=\"background-color: #e3f2fd;\">\r\n    ");
-            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "ede7bf0c7e0387d1f20b829fcfbba7df9a5c1fa05731", async() => {
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "ede7bf0c7e0387d1f20b829fcfbba7df9a5c1fa05952", async() => {
                 WriteLiteral("Home");
             }
             );
@@ -88,7 +95,7 @@ using RussianBathHouse.Models.Accessories;
             Write(__tagHelperExecutionContext.Output);
             __tagHelperExecutionContext = __tagHelperScopeManager.End();
             WriteLiteral("\r\n    ");
-            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "ede7bf0c7e0387d1f20b829fcfbba7df9a5c1fa07177", async() => {
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "ede7bf0c7e0387d1f20b829fcfbba7df9a5c1fa07398", async() => {
                 WriteLiteral("Bannik");
             }
             );
@@ -107,7 +114,7 @@ using RussianBathHouse.Models.Accessories;
             Write(__tagHelperExecutionContext.Output);
             __tagHelperExecutionContext = __tagHelperScopeManager.End();
             WriteLiteral("\r\n    ");
-            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "ede7bf0c7e0387d1f20b829fcfbba7df9a5c1fa08625", async() => {
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "ede7bf0c7e0387d1f20b829fcfbba7df9a5c1fa08846", async() => {
                 WriteLiteral("Photos");
             }
             );

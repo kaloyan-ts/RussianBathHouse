@@ -391,7 +391,6 @@ D:\Kaloyan\asp.net project identity\RussianBathHouse\RussianBathHouse\obj\Debug\
 D:\Kaloyan\asp.net project identity\RussianBathHouse\RussianBathHouse\obj\Debug\net5.0\RussianBathHouse.pdb
 D:\Kaloyan\asp.net project identity\RussianBathHouse\RussianBathHouse\obj\Debug\net5.0\RussianBathHouse.genruntimeconfig.cache
 D:\Kaloyan\asp.net project identity\RussianBathHouse\RussianBathHouse\obj\Debug\net5.0\RussianBathHouse.MvcApplicationPartsAssemblyInfo.cs
-D:\Kaloyan\asp.net project identity\RussianBathHouse\RussianBathHouse\obj\Debug\net5.0\Razor\Views\Accessories\Index.cshtml.g.cs
 D:\Kaloyan\asp.net project identity\RussianBathHouse\RussianBathHouse\obj\Debug\net5.0\Razor\Views\Reservations\Index.cshtml.g.cs
 D:\Kaloyan\asp.net project identity\RussianBathHouse\RussianBathHouse\obj\Debug\net5.0\Razor\Views\AboutUs\Bannik.cshtml.g.cs
 D:\Kaloyan\asp.net project identity\RussianBathHouse\RussianBathHouse\obj\Debug\net5.0\Razor\Views\AboutUs\Photos.cshtml.g.cs
@@ -445,3 +444,4 @@ D:\Kaloyan\asp.net project identity\RussianBathHouse\RussianBathHouse\obj\Debug\
 D:\Kaloyan\asp.net project identity\RussianBathHouse\RussianBathHouse\obj\Debug\net5.0\Razor\Views\Accessories\All.cshtml.g.cs
 D:\Kaloyan\asp.net project identity\RussianBathHouse\RussianBathHouse\obj\Debug\net5.0\RussianBathHouse.csproj.AssemblyReference.cache
 D:\Kaloyan\asp.net project identity\RussianBathHouse\RussianBathHouse\obj\Debug\net5.0\Razor\Views\Accessories\Edit.cshtml.g.cs
+D:\Kaloyan\asp.net project identity\RussianBathHouse\RussianBathHouse\obj\Debug\net5.0\Razor\Views\Reservations\Add.cshtml.g.cs
