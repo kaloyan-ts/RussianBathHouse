@@ -444,3 +444,4 @@ D:\Kaloyan\asp.net project identity\RussianBathHouse\RussianBathHouse\bin\Debug\
 D:\Kaloyan\asp.net project identity\RussianBathHouse\RussianBathHouse\obj\Debug\net5.0\Razor\Views\Accessories\Add.cshtml.g.cs
 D:\Kaloyan\asp.net project identity\RussianBathHouse\RussianBathHouse\obj\Debug\net5.0\Razor\Views\Accessories\All.cshtml.g.cs
 D:\Kaloyan\asp.net project identity\RussianBathHouse\RussianBathHouse\obj\Debug\net5.0\RussianBathHouse.csproj.AssemblyReference.cache
+D:\Kaloyan\asp.net project identity\RussianBathHouse\RussianBathHouse\obj\Debug\net5.0\Razor\Views\Accessories\Edit.cshtml.g.cs

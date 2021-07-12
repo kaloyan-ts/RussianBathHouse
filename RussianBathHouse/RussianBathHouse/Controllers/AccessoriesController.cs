@@ -21,6 +21,23 @@
             return Redirect("Accessories/All");
         }
 
+        public IActionResult All()
+        {
+            var accessories = this.data.Accessories
+                .Select(a => new AccessoriesAllViewModel
+                {
+                    Id = a.Id,
+                    Description = a.Description,
+                    Image = a.ImagePath,
+                    Name = a.Name,
+                    Price = a.Price,
+                    QuantityLeft = a.QuantityLeft
+                })
+                .ToList();
+
+            return View(accessories);
+        }
+
         public IActionResult Add()
         {
             return View();
@@ -48,31 +65,63 @@
             return RedirectToAction("All");
         }
 
-        public IActionResult All()
-        {
-            var accessories = this.data.Accessories
-                .Select(a => new AccessoriesAllViewModel
-                {
-                    Id = a.Id,
-                    Description = a.Description,
-                    Image = a.ImagePath,
-                    Name = a.Name,
-                    Price = a.Price,
-                    QuantityLeft = a.QuantityLeft
-                })
-                .ToList();
-
-            return View(accessories);
-        }
-
+       
         public IActionResult Delete(string Id)
         {
-            var accessory = this.data.Accessories.Find(Id);
+            var accessory = this.data.Accessories.FirstOrDefault(a => a.Id == Id);
+
+            if (accessory == null)
+            {
+                return RedirectToAction("Error", "Home");
+            }
 
             this.data.Accessories.Remove(accessory);
             this.data.SaveChanges();
 
-            return Redirect("All");
+            return RedirectToAction("All");
+        }
+
+        public IActionResult Edit(string Id)
+        {
+            var accessory = this.data.Accessories.FirstOrDefault(a => a.Id == Id);
+
+            if (accessory == null)
+            {
+                return RedirectToAction("Error", "Home");
+            }
+
+            var accessoryModel = new AccessoryEditFormModel
+            {
+                Id = accessory.Id,
+                Description = accessory.Description,
+                ImagePath = accessory.ImagePath,
+                Name = accessory.Name,
+                Price = accessory.Price,
+                Quantity = accessory.QuantityLeft
+            };
+
+            return View(accessoryModel);
+        }
+
+        [HttpPost]
+        public IActionResult Edit(AccessoryEditFormModel changedAccessory)
+        {
+            var accessory = this.data.Accessories.FirstOrDefault(a => a.Id == changedAccessory.Id);
+
+            if (accessory == null)
+            {
+                return RedirectToAction("Error", "Home");
+            }
+
+            accessory.Description = changedAccessory.Description;
+            accessory.ImagePath = changedAccessory.ImagePath;
+            accessory.Name = changedAccessory.Name;
+            accessory.Price = changedAccessory.Price;
+            accessory.QuantityLeft = changedAccessory.Quantity;
+
+            this.data.SaveChanges();
+
+            return RedirectToAction("All");
         }
     }
 }
