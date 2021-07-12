@@ -1,0 +1,35 @@
+﻿@model AccessoryEditFormModel
+
+
+<div class="row">
+    <div class="col-sm-12 offset-lg-2 col-lg-8 offset-xl-3 col-xl-6">
+        <form method="POST" action="Edit">
+            <div class="form-group">
+                <label asp-for="@Model.Name"></label>
+                <input asp-for="@Model.Name" type="text" class="form-control" placeholder="@Model.Name">
+                <span asp-validation-for="@Model.Name" class="small text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="@Model.ImagePath"></label>
+                <input asp-for="@Model.ImagePath" type="url" class="form-control" placeholder="@Model.ImagePath">
+                <span asp-validation-for="@Model.ImagePath" class="small text-danger"></span>
+                <img src="@Model.ImagePath" alt="Could not load Image" class="img-thumbnail">
+            </div>
+            <div class="form-group">
+                <label asp-for="@Model.Price"></label>
+                <input asp-for="@Model.Price" type="number" class="form-control" step="0.01" placeholder="@Model.Price">
+                <span asp-validation-for="@Model.Price" class="small text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="@Model.Description"></label>
+                <textarea asp-for="@Model.Description" class="form-control" rows="3" placeholder="@Model.Description"></textarea>
+            </div>
+            <div class="form-group">
+                <label asp-for="@Model.Quantity"></label>
+                <input asp-for="@Model.Quantity" type="number" class="form-control" placeholder="@Model.Quantity">
+                <span asp-validation-for="@Model.Quantity" class="small text-danger"></span>
+            </div>
+            <button type="submit" class="btn btn-primary" asp-route-id="@Model.Id">Save</button>
+        </form>
+    </div>
+</div>
