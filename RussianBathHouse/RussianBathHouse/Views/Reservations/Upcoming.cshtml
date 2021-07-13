@@ -1,24 +1,29 @@
 ﻿@model List<ReservationsUpcomingListModel>
 
-    <div class="card-group">
-        @foreach (var reservation in Model)
-        {
-            <div class="card col-4"  style="width: 18rem;">
-                <div class="card-body">
-                    <h5 class="card-title">Reservation:</h5>
-                    <p class="card-text">Services chosen:</p>
-                    <ul class="list-group-horizontal">
-                        @foreach (var service in reservation.ReservationServices)
-                        {
-                            <li class="list-group-item">@service.Description</li>
-                        }
-                    </ul>
-                </div>
-                <ul class="list-group list-group-flush">
-                    <li class="list-group-item">Number of People: @reservation.NumberOfPeople</li>
-                    <li class="list-group-item">Date of reservation: @reservation.ReservedFrom</li>
-                    <li class="list-group-item">Cabin: @reservation.CabinNumber</li>
+@{
+    ViewData["Title"] = "Reservations";
+}
+
+
+<div class="card-group">
+    @foreach (var reservation in Model)
+    {
+        <div class="card col-4" style="width: 18rem;">
+            <div class="card-body">
+                <h5 class="card-title">Reservation:</h5>
+                <p class="card-text">Services chosen:</p>
+                <ul class="list-group-horizontal">
+                    @foreach (var service in reservation.ReservationServices)
+                    {
+                        <li class="list-group-item">@service.Description</li>
+                    }
                 </ul>
             </div>
-        }
+            <ul class="list-group list-group-flush">
+                <li class="list-group-item">Number of People: @reservation.NumberOfPeople</li>
+                <li class="list-group-item">Date of reservation: @reservation.ReservedFrom</li>
+                <li class="list-group-item">Cabin: @reservation.CabinNumber</li>
+            </ul>
+        </div>
+    }
 </div>
