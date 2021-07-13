@@ -6,6 +6,11 @@
 
     public class Cabin
     {
+        public Cabin()
+        {
+            this.Reservations = new HashSet<Reservation>();
+        }
+
         [Key]
         public int Id { get; set; }
 

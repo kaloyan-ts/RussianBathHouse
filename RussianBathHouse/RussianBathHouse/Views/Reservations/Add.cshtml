@@ -1,0 +1,38 @@
+﻿@model ReservationAddFormModel
+
+
+<div class="row">
+    <div class="col-sm-12 offset-lg-2 col-lg-8 offset-xl-3 col-xl-6">
+        <form method="POST" action="Add">
+            <div class="form-group">
+                <label asp-for="@Model.NumberOfPeople"></label>
+                <input asp-for="@Model.NumberOfPeople" type="number" class="form-control" placeholder="Enter number of people">
+                <span asp-validation-for="@Model.NumberOfPeople" class="small text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="@Model.ReserveFrom">Day and Time:</label>
+                <input type="datetime-local" asp-for="@Model.ReserveFrom">
+                <span asp-validation-for="@Model.ReserveFrom" class="small text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="@Model.ReserveForHours"></label>
+                <input asp-for="@Model.ReserveForHours" type="number" class="form-control" placeholder="Number of Hours you want to stay in the Banya">
+                <span asp-validation-for="@Model.ReserveForHours" class="small text-danger"></span>
+            </div>
+            <div class="form-group">
+                <div class="form-check">
+                    @foreach (var service in Model.Services)
+                    {
+                        <input type="checkbox" name="Services[@service.Id].Id" value="@service.Id" />
+                        <input type="hidden" name="Services.Index" value="@service.Id" />
+                        @service.Desription
+
+                        <br />
+                    }
+                </div>
+            </div>
+            <button type="submit" class="btn btn-primary">Save</button>
+        </form>
+    </div>
+</div>
+

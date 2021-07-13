@@ -5,6 +5,11 @@
 
     public class Reservation
     {
+        public Reservation()
+        {
+            this.ReservationServices = new HashSet<ReservationService>();
+        }
+
         public string Id { get; set; } = Guid.NewGuid().ToString();
 
         public int NumberOfPeople { get; set; }
@@ -17,6 +22,6 @@
 
         public DateTime ReservedUntill { get; set; }
 
-        public ICollection<Service> Services{ get; set; }
+        public ICollection<ReservationService> ReservationServices { get; set; }
     }
 }

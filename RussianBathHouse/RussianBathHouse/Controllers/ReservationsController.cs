@@ -45,6 +45,11 @@
 
             foreach (var service in reservationModel.Services)
             {
+                if (service == null)
+                {
+                    continue;
+                }
+
                 services.Add(this.data.Services.First(s => s.Id == service.Id));
             }
 
@@ -55,8 +60,18 @@
                 CabinId = cabinForReservation,
                 ReservedFrom = reservationModel.ReserveFrom,
                 ReservedUntill = reservationModel.ReserveFrom.AddHours(reservationModel.ReserveForHours),
-                Services = services
+
             };
+
+
+            foreach (var service in services)
+            {
+                reservation.ReservationServices.Add(new ReservationService
+                {
+                    ServiceId = service.Id
+                });
+            }
+
 
             this.data.Reservations.Add(reservation);
             this.data.SaveChanges();
