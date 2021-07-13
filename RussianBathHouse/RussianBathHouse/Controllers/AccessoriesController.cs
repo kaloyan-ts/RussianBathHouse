@@ -21,9 +21,28 @@
             return Redirect("Accessories/All");
         }
 
-        public IActionResult All()
+        public IActionResult All([FromQuery]AccessoriesQueryModel query)
         {
-            var accessories = this.data.Accessories
+            var accessoriesQuery = this.data.Accessories.AsQueryable();
+
+            if (!string.IsNullOrWhiteSpace(query.SearchTerm))
+            {
+                accessoriesQuery = accessoriesQuery.Where(c => (c.Name + " " + c.Description).ToLower().Contains(query.SearchTerm.ToLower()));
+            }
+
+            accessoriesQuery = query.Sorting switch
+            {
+                AccessoriesSorting.AlphabeticalyDescending => accessoriesQuery.OrderByDescending(c => c.Name),
+                AccessoriesSorting.Price => accessoriesQuery.OrderBy(c => c.Price),
+                AccessoriesSorting.PriceDescending => accessoriesQuery.OrderByDescending(c => c.Price),
+                AccessoriesSorting.Alphabeticaly or _ => accessoriesQuery.OrderBy(c => c.Name)
+            };
+
+            var totalAccessories = accessoriesQuery.Count();
+
+            var accessories = accessoriesQuery
+                 .Skip((query.CurrentPage - 1) * AccessoriesQueryModel.AccessoriesPerPage)
+                .Take(AccessoriesQueryModel.AccessoriesPerPage)
                 .Select(a => new AccessoriesAllViewModel
                 {
                     Id = a.Id,
@@ -35,7 +54,11 @@
                 })
                 .ToList();
 
-            return View(accessories);
+
+            query.TotalAccessories = totalAccessories;
+            query.Accessories = accessories;
+
+            return View(query);
         }
 
         public IActionResult Add()

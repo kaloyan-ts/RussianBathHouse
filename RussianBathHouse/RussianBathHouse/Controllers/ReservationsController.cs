@@ -4,6 +4,8 @@
     using RussianBathHouse.Data;
     using RussianBathHouse.Data.Models;
     using RussianBathHouse.Models.Reservations;
+    using RussianBathHouse.Models.Services;
+    using System;
     using System.Collections.Generic;
     using System.Linq;
 
@@ -39,7 +41,11 @@
 
             var cabinForReservation = this.data.Cabins
                 .Where(c => c.Capacity == reservationModel.NumberOfPeople
-                || c.Capacity > reservationModel.NumberOfPeople).Select(c => c.Id).First();
+                || c.Capacity > reservationModel.NumberOfPeople)
+                //&& c.Reservations.Where(r => DateTime.Compare())
+                .Select(c => c.Id).First();
+
+            //isCabinAvailable()
 
             var services = new List<Service>();
 
@@ -66,7 +72,7 @@
 
             foreach (var service in services)
             {
-                reservation.ReservationServices.Add(new ReservationService
+                reservation.ReservationServices.Add(new ServiceReservationListViewModel
                 {
                     ServiceId = service.Id
                 });
@@ -79,6 +85,31 @@
             return RedirectToAction("Index");
         }
 
+        public IActionResult Upcoming()
+        {
+            var reservations = this.data.Reservations
+                .Select(a => new ReservationsUpcomingListModel
+                {
+                    CabinNumber = a.CabinId,
+                    NumberOfPeople = a.NumberOfPeople,
+                    ReservedFrom = a.ReservedFrom,
+                    ReservationServices = a.ReservationServices
+                    .Select(rs => new ServiceReservaionListViewModel
+                    {
+                        Description = rs.Service.Description
+                    }),
+                })
+                .ToList();
+
+            return View(reservations);
+        }
+
+        private bool isCabinAvailable(int cabinId, DateTime From, DateTime Until)
+        {
+            var cabin = this.data.Cabins.First(c => c.Id == cabinId);
+
+            return true;
+        }
 
         private ReservationsServicesListingModel[] GetReservationServices()
         {
@@ -87,11 +118,10 @@
                 .Select(c => new ReservationsServicesListingModel
                 {
                     Id = c.Id,
-                    Desription = c.Description
+                    Description = c.Description
                 })
                 .ToArray();
         }
-
     }
 }
 

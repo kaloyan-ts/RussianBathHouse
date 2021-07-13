@@ -15,8 +15,8 @@
         public string ImagePath { get; set; }
 
         [DisplayFormat(DataFormatString = "{0:C}")]
-        [Range(0.01, 100.00,
-           ErrorMessage = "Price must be between 0.01 and 100.00")]
+        [Range(0.01, 1000.00,
+           ErrorMessage = "Price must be between 0.01 and 1000.00")]
         public decimal Price { get; set; }
 
         public string Description { get; set; }

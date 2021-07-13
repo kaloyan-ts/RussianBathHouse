@@ -9,7 +9,7 @@
     {
         public Service()
         {
-            this.ReservationServices = new HashSet<ReservationService>();
+            this.ReservationServices = new HashSet<ServiceReservationListViewModel>();
         }
 
         public string Id { get; set; } = Guid.NewGuid().ToString();
@@ -20,6 +20,6 @@
         [Column(TypeName = "decimal(5, 2)")]
         public decimal Price { get; set; }
         
-        public ICollection<ReservationService> ReservationServices { get; set; }
+        public ICollection<ServiceReservationListViewModel> ReservationServices { get; set; }
     }
 }

@@ -5,6 +5,7 @@ namespace RussianBathHouse.Models.Reservations
     {
         public string Id { get; set; }
 
-        public string Desription { get; set; }
+        public string Description { get; set; }
     }
 }
+

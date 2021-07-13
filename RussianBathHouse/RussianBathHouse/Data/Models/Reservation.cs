@@ -7,7 +7,7 @@
     {
         public Reservation()
         {
-            this.ReservationServices = new HashSet<ReservationService>();
+            this.ReservationServices = new HashSet<ServiceReservationListViewModel>();
         }
 
         public string Id { get; set; } = Guid.NewGuid().ToString();
@@ -22,6 +22,6 @@
 
         public DateTime ReservedUntill { get; set; }
 
-        public ICollection<ReservationService> ReservationServices { get; set; }
+        public ICollection<ServiceReservationListViewModel> ReservationServices { get; set; }
     }
 }

@@ -1,6 +1,6 @@
 ﻿namespace RussianBathHouse.Data.Models
 {
-    public class ReservationService
+    public class ServiceReservationListViewModel
     {
         public Service Service { get; set; }
 
