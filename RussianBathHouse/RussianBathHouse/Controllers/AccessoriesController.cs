@@ -46,11 +46,9 @@
                 .Select(a => new AccessoriesAllViewModel
                 {
                     Id = a.Id,
-                    Description = a.Description,
                     Image = a.ImagePath,
                     Name = a.Name,
                     Price = a.Price,
-                    QuantityLeft = a.QuantityLeft
                 })
                 .ToList();
 
@@ -79,7 +77,8 @@
                 ImagePath = accessoryModel.ImagePath,
                 Name = accessoryModel.Name,
                 Price = accessoryModel.Price,
-                QuantityLeft = accessoryModel.Quantity
+                QuantityLeft = accessoryModel.Quantity,
+                Description = accessoryModel.Description
             };
 
             this.data.Accessories.Add(accessory);
@@ -145,6 +144,28 @@
             this.data.SaveChanges();
 
             return RedirectToAction("All");
+        }
+
+        public IActionResult Details(string Id)
+        {
+            var accessory = this.data.Accessories.Find(Id);
+
+            if (accessory == null)
+            {
+                return BadRequest();
+            }
+
+            var accessoryModel = new AccessoryDetailsViewModel
+            {
+                Id = accessory.Id,
+                Description = accessory.Description,
+                Image = accessory.ImagePath,
+                Name = accessory.Name,
+                Price = accessory.Price,
+                QuantityLeft = accessory.QuantityLeft
+            };
+
+            return View(accessoryModel);
         }
     }
 }
