@@ -5,7 +5,7 @@
     using RussianBathHouse.Data.Models;
 
 
-    public class BathHouseDbContext : IdentityDbContext
+    public class BathHouseDbContext : IdentityDbContext<ApplicationUser>
     {
         public BathHouseDbContext(DbContextOptions<BathHouseDbContext> options)
             : base(options)

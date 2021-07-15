@@ -1,15 +1,16 @@
 ﻿namespace RussianBathHouse.Infrastructure
 {
     using Microsoft.AspNetCore.Builder;
+    using Microsoft.AspNetCore.Identity;
     using Microsoft.EntityFrameworkCore;
     using Microsoft.Extensions.DependencyInjection;
     using RussianBathHouse.Data;
     using RussianBathHouse.Data.Models;
     using System.Linq;
+    using System.Threading.Tasks;
 
     public static class ApplicationBuilderExtensions
     {
-
         public static IApplicationBuilder PrepareDatabase(this IApplicationBuilder app)
         {
 
@@ -88,7 +89,7 @@
                     Description ="Body Scrub",
                      Price = 40,
                 }
-            }) ;
+            });
 
             data.SaveChanges();
         }

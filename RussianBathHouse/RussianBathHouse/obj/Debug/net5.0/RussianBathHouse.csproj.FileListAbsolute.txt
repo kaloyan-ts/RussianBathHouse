@@ -447,3 +447,10 @@ D:\Kaloyan\asp.net project identity\RussianBathHouse\RussianBathHouse\obj\Debug\
 D:\Kaloyan\asp.net project identity\RussianBathHouse\RussianBathHouse\obj\Debug\net5.0\Razor\Views\Reservations\Add.cshtml.g.cs
 D:\Kaloyan\asp.net project identity\RussianBathHouse\RussianBathHouse\obj\Debug\net5.0\Razor\Views\Reservations\Upcoming.cshtml.g.cs
 D:\Kaloyan\asp.net project identity\RussianBathHouse\RussianBathHouse\obj\Debug\net5.0\Razor\Views\Accessories\Details.cshtml.g.cs
+D:\Kaloyan\asp.net project identity\RussianBathHouse\RussianBathHouse\obj\Debug\net5.0\Razor\Areas\Identity\Pages\Account\_ViewImports.cshtml.g.cs
+D:\Kaloyan\asp.net project identity\RussianBathHouse\RussianBathHouse\obj\Debug\net5.0\Razor\Areas\Identity\Pages\_ValidationScriptsPartial.cshtml.g.cs
+D:\Kaloyan\asp.net project identity\RussianBathHouse\RussianBathHouse\obj\Debug\net5.0\Razor\Areas\Identity\Pages\_ViewImports.cshtml.g.cs
+D:\Kaloyan\asp.net project identity\RussianBathHouse\RussianBathHouse\obj\Debug\net5.0\Razor\Areas\Identity\Pages\Account\Manage\PersonalData.cshtml.g.cs
+D:\Kaloyan\asp.net project identity\RussianBathHouse\RussianBathHouse\obj\Debug\net5.0\Razor\Areas\Identity\Pages\Account\Manage\_ManageNav.cshtml.g.cs
+D:\Kaloyan\asp.net project identity\RussianBathHouse\RussianBathHouse\obj\Debug\net5.0\Razor\Areas\Identity\Pages\Account\Manage\_ViewImports.cshtml.g.cs
+D:\Kaloyan\asp.net project identity\RussianBathHouse\RussianBathHouse\obj\Debug\net5.0\Razor\Areas\Identity\Pages\Account\Register.cshtml.g.cs

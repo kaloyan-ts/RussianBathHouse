@@ -47,8 +47,15 @@ using RussianBathHouse.Models.Services;
 #line default
 #line hidden
 #nullable disable
+#nullable restore
+#line 6 "D:\Kaloyan\asp.net project identity\RussianBathHouse\RussianBathHouse\Views\_ViewImports.cshtml"
+using RussianBathHouse.Data.Models;
+
+#line default
+#line hidden
+#nullable disable
     [global::Microsoft.AspNetCore.Razor.Hosting.RazorSourceChecksumAttribute(@"SHA1", @"d8ddb6bffa5a9b264bf8f89038bf03c234083fd3", @"/Views/Home/Privacy.cshtml")]
-    [global::Microsoft.AspNetCore.Razor.Hosting.RazorSourceChecksumAttribute(@"SHA1", @"8bb8079354dfa15e96d0d951d3fc7fdd590da93d", @"/Views/_ViewImports.cshtml")]
+    [global::Microsoft.AspNetCore.Razor.Hosting.RazorSourceChecksumAttribute(@"SHA1", @"21da8d510278a76ca74f44c5bb9b2635740cd4ab", @"/Views/_ViewImports.cshtml")]
     public class Views_Home_Privacy : global::Microsoft.AspNetCore.Mvc.Razor.RazorPage<dynamic>
     {
         #pragma warning disable 1998

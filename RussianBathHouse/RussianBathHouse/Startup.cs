@@ -8,6 +8,7 @@ namespace RussianBathHouse
     using Microsoft.Extensions.DependencyInjection;
     using Microsoft.Extensions.Hosting;
     using RussianBathHouse.Data;
+    using RussianBathHouse.Data.Models;
     using RussianBathHouse.Infrastructure;
 
     public class Startup
@@ -18,21 +19,24 @@ namespace RussianBathHouse
 
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddDbContext<BathHouseDbContext>(options =>
-                options.UseSqlServer(
-                    Configuration.GetConnectionString("DefaultConnection")));
+            services
+                .AddDbContext<BathHouseDbContext>(options => options
+                    .UseSqlServer(this.Configuration.GetConnectionString("DefaultConnection")));
 
             services.AddDatabaseDeveloperPageExceptionFilter();
 
-            services.AddDefaultIdentity<IdentityUser>(options => 
-            {
-                options.Password.RequireDigit = false;
-                options.Password.RequireLowercase = false;
-                options.Password.RequireNonAlphanumeric = false;
-                options.Password.RequireUppercase = false;
-            })
+            services
+                .AddDefaultIdentity<ApplicationUser>(options =>
+                {
+                    options.Password.RequireDigit = false;
+                    options.Password.RequireLowercase = false;
+                    options.Password.RequireNonAlphanumeric = false;
+                    options.Password.RequireUppercase = false;
+                })
                 .AddEntityFrameworkStores<BathHouseDbContext>();
-            services.AddControllersWithViews();
+
+            services
+                .AddControllersWithViews();
 
         }
 

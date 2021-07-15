@@ -15,5 +15,11 @@
         public const string ReservationMinYear = "1/1/2021";
         public const string ReservationMaxYear = "1/1/2023";
 
+        public const int FirstNameMaxLength = 20;
+        public const int FirstNameMinLength = 2;
+
+        public const int LastNameMaxLength = 20;
+        public const int LastNameMinLength = 2;
+
     }
 }
