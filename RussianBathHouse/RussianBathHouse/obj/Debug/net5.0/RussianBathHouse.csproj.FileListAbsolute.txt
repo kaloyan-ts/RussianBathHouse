@@ -373,7 +373,6 @@ D:\Kaloyan\asp.net project identity\RussianBathHouse\RussianBathHouse\obj\Debug\
 D:\Kaloyan\asp.net project identity\RussianBathHouse\RussianBathHouse\obj\Debug\net5.0\RussianBathHouse.TagHelpers.input.cache
 D:\Kaloyan\asp.net project identity\RussianBathHouse\RussianBathHouse\obj\Debug\net5.0\RussianBathHouse.TagHelpers.output.cache
 D:\Kaloyan\asp.net project identity\RussianBathHouse\RussianBathHouse\obj\Debug\net5.0\RussianBathHouse.RazorCoreGenerate.cache
-D:\Kaloyan\asp.net project identity\RussianBathHouse\RussianBathHouse\obj\Debug\net5.0\Razor\Areas\Identity\Pages\_ViewStart.cshtml.g.cs
 D:\Kaloyan\asp.net project identity\RussianBathHouse\RussianBathHouse\obj\Debug\net5.0\Razor\Views\Home\Index.cshtml.g.cs
 D:\Kaloyan\asp.net project identity\RussianBathHouse\RussianBathHouse\obj\Debug\net5.0\Razor\Views\Home\Privacy.cshtml.g.cs
 D:\Kaloyan\asp.net project identity\RussianBathHouse\RussianBathHouse\obj\Debug\net5.0\Razor\Views\Shared\Error.cshtml.g.cs
@@ -446,11 +445,3 @@ D:\Kaloyan\asp.net project identity\RussianBathHouse\RussianBathHouse\obj\Debug\
 D:\Kaloyan\asp.net project identity\RussianBathHouse\RussianBathHouse\obj\Debug\net5.0\Razor\Views\Accessories\Edit.cshtml.g.cs
 D:\Kaloyan\asp.net project identity\RussianBathHouse\RussianBathHouse\obj\Debug\net5.0\Razor\Views\Reservations\Add.cshtml.g.cs
 D:\Kaloyan\asp.net project identity\RussianBathHouse\RussianBathHouse\obj\Debug\net5.0\Razor\Views\Reservations\Upcoming.cshtml.g.cs
-D:\Kaloyan\asp.net project identity\RussianBathHouse\RussianBathHouse\obj\Debug\net5.0\Razor\Views\Accessories\Details.cshtml.g.cs
-D:\Kaloyan\asp.net project identity\RussianBathHouse\RussianBathHouse\obj\Debug\net5.0\Razor\Areas\Identity\Pages\Account\_ViewImports.cshtml.g.cs
-D:\Kaloyan\asp.net project identity\RussianBathHouse\RussianBathHouse\obj\Debug\net5.0\Razor\Areas\Identity\Pages\_ValidationScriptsPartial.cshtml.g.cs
-D:\Kaloyan\asp.net project identity\RussianBathHouse\RussianBathHouse\obj\Debug\net5.0\Razor\Areas\Identity\Pages\_ViewImports.cshtml.g.cs
-D:\Kaloyan\asp.net project identity\RussianBathHouse\RussianBathHouse\obj\Debug\net5.0\Razor\Areas\Identity\Pages\Account\Manage\PersonalData.cshtml.g.cs
-D:\Kaloyan\asp.net project identity\RussianBathHouse\RussianBathHouse\obj\Debug\net5.0\Razor\Areas\Identity\Pages\Account\Manage\_ManageNav.cshtml.g.cs
-D:\Kaloyan\asp.net project identity\RussianBathHouse\RussianBathHouse\obj\Debug\net5.0\Razor\Areas\Identity\Pages\Account\Manage\_ViewImports.cshtml.g.cs
-D:\Kaloyan\asp.net project identity\RussianBathHouse\RussianBathHouse\obj\Debug\net5.0\Razor\Areas\Identity\Pages\Account\Register.cshtml.g.cs

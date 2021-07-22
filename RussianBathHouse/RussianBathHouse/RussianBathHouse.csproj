@@ -7,6 +7,17 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Areas\**" />
+    <Compile Remove="Models\Cabins\**" />
+    <Content Remove="Areas\**" />
+    <Content Remove="Models\Cabins\**" />
+    <EmbeddedResource Remove="Areas\**" />
+    <EmbeddedResource Remove="Models\Cabins\**" />
+    <None Remove="Areas\**" />
+    <None Remove="Models\Cabins\**" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore" Version="5.0.7" />
     <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="5.0.6" />
     <PackageReference Include="Microsoft.AspNetCore.Identity.UI" Version="5.0.6" />
@@ -15,23 +26,12 @@
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
-    <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="5.0.6" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="5.0.8" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="5.0.6">
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
     <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="5.0.2" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="Models\Cabins\" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <None Include="Areas\Identity\Pages\Account\Manage\PersonalData.cshtml" />
-    <None Include="Areas\Identity\Pages\Account\Manage\_ManageNav.cshtml" />
-    <None Include="Areas\Identity\Pages\Account\Manage\_ViewImports.cshtml" />
-    <None Include="Areas\Identity\Pages\Account\_ViewImports.cshtml" />
   </ItemGroup>
 
 </Project>
