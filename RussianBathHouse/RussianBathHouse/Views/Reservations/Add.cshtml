@@ -23,20 +23,54 @@
                 <input asp-for="@Model.ReserveForHours" type="number" class="form-control" placeholder="Number of Hours you want to stay in the Banya">
                 <span asp-validation-for="@Model.ReserveForHours" class="small text-danger"></span>
             </div>
-            <div class="form-group">
-                <div class="form-check">
-                    @foreach (var service in Model.Services)
-                    {
-                        <input type="checkbox" name="Services[@service.Id].Id" value="@service.Id" />
-                        <input type="hidden" name="Services.Index" value="@service.Id" />
-                        @service.Description
 
-                        <br />
-                    }
-                </div>
-            </div>
-            <button type="submit" class="btn btn-primary">Save</button>
+            <button type="submit" class="btn btn-primary">Choose Services</button>
         </form>
     </div>
 </div>
+
+<div id="demo-booking-single"></div>
+@section Scripts{
+    var min = '2021-07-24T00:00';
+    var max = '2022-01-24T00:00';
+
+    mobiscroll.datepicker('#demo-booking-single', {
+    controls: ['calendar'],
+    min: min,
+    max: max,
+    onPageLoading: function (event, inst) {
+    getPrices(event.firstDay, function callback(bookings) {
+    inst.setOptions({
+    labels: bookings.labels,
+    invalid: bookings.invalid
+    });
+    });
+    }
+    });
+
+    function getPrices(d, callback) {
+    var invalid = [],
+    labels = [];
+
+    mobiscroll.util.http.getJson('//trial.mobiscroll.com/getprices/?year=' + d.getFullYear() + '&month=' + d.getMonth(), function (bookings) {
+    for (var i = 0; i < bookings.length; ++i) {
+    var booking = bookings[i],
+    d = new Date(booking.d);
+
+    if (booking.price > 0) {
+    labels.push({
+    start: d,
+    title: '$' + booking.price,
+    textColor: '#e1528f'
+    });
+    } else {
+    invalid.push(d);
+    }
+    }
+    callback({ labels: labels, invalid: invalid });
+    }, 'jsonp');
+}
+}
+
+
 

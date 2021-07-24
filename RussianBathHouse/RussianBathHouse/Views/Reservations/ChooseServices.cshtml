@@ -1,0 +1,24 @@
+﻿@model ReservationsServicesListingModel
+
+
+@{ 
+    Model.ReservationId = Model.ReservationId;
+}
+    <form method="POST" asp-action="ChooseServices">
+        <div class="form-group">
+            <div class="form-check">
+                @foreach (var service in Model.Services)
+                {
+                    <input type="checkbox" name="Services[@service.Id].Id" value="@service.Id" />
+                    <input type="hidden" name="Services.Index" value="@service.Id" />
+                    @service.Description
+                    <br />
+                }
+            </div>
+            <input type="hidden" asp-for="ReservationId" name="ReservationId" value="@Model.ReservationId">
+            <button type="submit" class="btn btn-primary"
+                    asp-controller="Reservations" asp-action="ChooseServices">
+                Save
+            </button>
+        </div>
+    </form>

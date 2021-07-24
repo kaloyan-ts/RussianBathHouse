@@ -6,10 +6,7 @@
     using static Data.DataConstants;
     public class ReservationAddFormModel
     {
-        public ReservationAddFormModel()
-        {
-            this.Services = new ReservationsServicesListingModel[100];
-        }
+
         [Required]
         [Range(ReservationMinPeople, ReservationMaxPeople)]
         public int NumberOfPeople { get; set; }
@@ -21,6 +18,5 @@
         [Range(ReservationMinHours, ReservationMaxHours)]
         public int ReserveForHours { get; set; }
 
-        public ReservationsServicesListingModel[] Services { get; set; }
     }
 }

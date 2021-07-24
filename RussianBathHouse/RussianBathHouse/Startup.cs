@@ -10,6 +10,7 @@ namespace RussianBathHouse
     using RussianBathHouse.Data;
     using RussianBathHouse.Data.Models;
     using RussianBathHouse.Infrastructure;
+    using RussianBathHouse.Services.Accessories;
 
     public class Startup
     {
@@ -37,6 +38,8 @@ namespace RussianBathHouse
 
             services
                 .AddControllersWithViews();
+
+            services.AddTransient<IAccessoriesService, AccessoriesService>();
 
         }
 

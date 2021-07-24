@@ -25,10 +25,7 @@
 
         public IActionResult Add()
         {
-            return View(new ReservationAddFormModel
-            {
-                Services = this.GetReservationServices()
-            });
+            return View();
         }
 
         [HttpPost]
@@ -36,7 +33,7 @@
         {
             if (!ModelState.IsValid)
             {
-                return RedirectToAction("Add");
+                return View(reservationModel);
             }
 
             var cabinForReservation = this.data.Cabins
@@ -47,19 +44,6 @@
 
             //isCabinAvailable()
 
-            var services = new List<Service>();
-
-            foreach (var service in reservationModel.Services)
-            {
-                if (service == null)
-                {
-                    continue;
-                }
-
-                services.Add(this.data.Services.First(s => s.Id == service.Id));
-            }
-
-
             var reservation = new Reservation
             {
                 NumberOfPeople = reservationModel.NumberOfPeople,
@@ -69,17 +53,54 @@
 
             };
 
+            this.data.Reservations.Add(reservation);
+            this.data.SaveChanges();
 
-            foreach (var service in services)
+            return RedirectToAction("ChooseServices", new { id = reservation.Id });
+        }
+
+        public IActionResult ChooseServices([FromRoute] string id)
+        {
+            var model = new ReservationsServicesListingModel
             {
-                reservation.ReservationServices.Add(new ServiceReservationListViewModel
+                Services = GetReservationServices(),
+                ReservationId = id
+            };
+
+            return View(model);
+        }
+
+        [HttpPost]
+        public IActionResult ChooseServices(ReservationsServicesListingModel servicesModel)
+        {
+
+            var reservation = this.data.Reservations.FirstOrDefault(r => r.Id == servicesModel.ReservationId);
+
+            if (reservation == null)
+            {
+                return BadRequest();
+            }
+
+            var choseServices = new List<Service>();
+
+            foreach (var service in servicesModel.Services)
+            {
+                if (service == null)
+                {
+                    continue;
+                }
+
+                choseServices.Add(this.data.Services.First(s => s.Id == service.Id));
+            }
+
+            foreach (var service in choseServices)
+            {
+                reservation.ReservationServices.Add(new ReservationService
                 {
                     ServiceId = service.Id
                 });
             }
 
-
-            this.data.Reservations.Add(reservation);
             this.data.SaveChanges();
 
             return RedirectToAction("Index");
@@ -94,7 +115,7 @@
                     NumberOfPeople = a.NumberOfPeople,
                     ReservedFrom = a.ReservedFrom,
                     ReservationServices = a.ReservationServices
-                    .Select(rs => new ServiceReservaionListViewModel
+                    .Select(rs => new ServiceListViewModel
                     {
                         Description = rs.Service.Description
                     }),
@@ -111,16 +132,17 @@
             return true;
         }
 
-        private ReservationsServicesListingModel[] GetReservationServices()
+        private ServiceListViewModel[] GetReservationServices()
         {
-            return this.data
+            var services = this.data
                 .Services
-                .Select(c => new ReservationsServicesListingModel
+                .Select(c => new ServiceListViewModel
                 {
                     Id = c.Id,
                     Description = c.Description
                 })
                 .ToArray();
+            return services;
         }
     }
 }

@@ -20,7 +20,7 @@
 
         public DbSet<Accessory> Accessories { get; init; }
 
-        public DbSet<ServiceReservationListViewModel> ReservationServices { get; set; }
+        public DbSet<ReservationService> ReservationServices { get; set; }
 
         protected override void OnModelCreating(ModelBuilder builder)
         {
@@ -29,22 +29,22 @@
                 .WithMany(c => c.Reservations)
                 .OnDelete(DeleteBehavior.Restrict);
 
-            builder.Entity<ServiceReservationListViewModel>()
-                .HasKey(rs => new { rs.ServiceId, rs.ReservationId });
-
-            builder.Entity<ServiceReservationListViewModel>()
-                .HasOne(rs => rs.Service)
-                .WithMany(s => s.ReservationServices)
-                .HasForeignKey(s => s.ServiceId)
-                .OnDelete(DeleteBehavior.Restrict);
-
-            builder.Entity<ServiceReservationListViewModel>()
-                .HasOne(rs => rs.Reservation)
-                .WithMany(r => r.ReservationServices)
-                .HasForeignKey(r => r.ReservationId)
-                .OnDelete(DeleteBehavior.Restrict);
-
-            base.OnModelCreating(builder);
+           builder.Entity<ReservationService>()
+               .HasKey(rs => new { rs.ServiceId, rs.ReservationId });
+          
+           builder.Entity<ReservationService>()
+               .HasOne(rs => rs.Service)
+               .WithMany(s => s.ReservationServices)
+               .HasForeignKey(s => s.ServiceId)
+               .OnDelete(DeleteBehavior.Restrict);
+          
+           builder.Entity<ReservationService>()
+               .HasOne(rs => rs.Reservation)
+               .WithMany(r => r.ReservationServices)
+               .HasForeignKey(r => r.ReservationId)
+               .OnDelete(DeleteBehavior.Cascade);
+          
+           base.OnModelCreating(builder);
         }
     }
 }

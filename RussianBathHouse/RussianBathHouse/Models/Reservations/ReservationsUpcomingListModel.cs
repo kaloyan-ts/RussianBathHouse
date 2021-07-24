@@ -13,7 +13,7 @@
 
         public DateTime ReservedFrom { get; set; }
 
-        public IEnumerable<ServiceReservaionListViewModel> ReservationServices { get; set; }
+        public IEnumerable<ServiceListViewModel> ReservationServices { get; set; }
 
     }
 }

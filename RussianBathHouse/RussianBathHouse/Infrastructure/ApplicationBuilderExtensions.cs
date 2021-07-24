@@ -68,28 +68,28 @@
             }
 
             data.Services.AddRange(new[]
-            {
-                new Service
-                {
-                     Description ="Traditional parenie by a Bannik",
-                     Price = 10,
-                },
-                new Service
-                {
-                   Description ="Luxury organic body scrub",
-                     Price = 20,
-                },
-                new Service
-                {
-                    Description ="Classical Russian Massage",
-                     Price = 50,
-                },
-                new Service
-                {
-                    Description ="Body Scrub",
-                     Price = 40,
-                }
-            });
+           {
+               new Service
+               {
+                    Description ="Traditional parenie by a Bannik",
+                    Price = 10,
+               },
+               new Service
+               {
+                  Description ="Luxury organic body scrub",
+                    Price = 20,
+               },
+               new Service
+               {
+                   Description ="Classical Russian Massage",
+                    Price = 50,
+               },
+               new Service
+               {
+                   Description ="Body Scrub",
+                    Price = 40,
+               }
+           });
 
             data.SaveChanges();
         }

@@ -1,11 +1,13 @@
 ﻿
+using RussianBathHouse.Models.Services;
+
 namespace RussianBathHouse.Models.Reservations
 {
     public class ReservationsServicesListingModel
     {
-        public string Id { get; set; }
+        public string ReservationId { get; set; }
 
-        public string Description { get; set; }
+        public ServiceListViewModel[] Services { get; set; }
     }
 }
 
