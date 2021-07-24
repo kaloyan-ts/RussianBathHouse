@@ -1,0 +1,24 @@
+﻿@model AccessoryDetailsViewModel
+
+<div class="card">
+    <img class="card-img-top" src="@Model.Image" alt="Card image cap">
+    <div class="card-body">
+        <h5 class="card-title">@Model.Name</h5>
+        <p class="card-text">@Model.Description</p>
+    </div>
+    <ul class="list-group list-group-flush">
+        <li class="list-group-item">Price: @Model.Price $</li>
+        <li class="list-group-item">Quantity left: @Model.QuantityLeft</li>
+    </ul>
+    <div class="card-body row">
+        <div class="col-4">
+            <button type="button" asp-controller="Accessories" asp-action="Buy" class="btn-primary btn-lg btn-block">Buy</button>
+        </div>
+        <div class="col-4">
+            <button type="button" asp-controller="Accessories" asp-action="Edit" class="btn-secondary btn-lg btn-block">Edit</button>
+        </div>
+        <div class="col-4">
+            <button type="button" asp-controller="Accessories" asp-action="Delete" class="btn-danger btn-lg btn-block">Delete</button>
+        </div>
+    </div>
+</div>
