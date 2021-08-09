@@ -1,26 +1,34 @@
 ﻿namespace RussianBathHouse.Controllers
 {
+    using Microsoft.AspNetCore.Authorization;
     using Microsoft.AspNetCore.Mvc;
     using RussianBathHouse.Data;
     using RussianBathHouse.Data.Models;
+    using RussianBathHouse.Infrastructure;
     using RussianBathHouse.Models.Reservations;
     using RussianBathHouse.Models.Services;
+    using RussianBathHouse.Services.Reservations;
     using System;
     using System.Collections.Generic;
     using System.Linq;
 
+    [Authorize]
     public class ReservationsController : Controller
     {
         private readonly BathHouseDbContext data;
+        private readonly IReservationsService reservations;
 
-        public ReservationsController(BathHouseDbContext data)
+        public ReservationsController(BathHouseDbContext data, IReservationsService reservations)
         {
             this.data = data;
+            this.reservations = reservations;
         }
 
         public IActionResult Index()
         {
-            return View();
+            var upcomingReservationsForUser = reservations.Upcoming(this.User.Id());
+
+            return View(upcomingReservationsForUser);
         }
 
         public IActionResult Add()
@@ -46,6 +54,7 @@
 
             var reservation = new Reservation
             {
+                UserId = this.User.Id(),
                 NumberOfPeople = reservationModel.NumberOfPeople,
                 CabinId = cabinForReservation,
                 ReservedFrom = reservationModel.ReserveFrom,
@@ -81,7 +90,7 @@
                 return BadRequest();
             }
 
-            var choseServices = new List<Service>();
+            var chosenServices = new List<Service>();
 
             foreach (var service in servicesModel.Services)
             {
@@ -90,10 +99,10 @@
                     continue;
                 }
 
-                choseServices.Add(this.data.Services.First(s => s.Id == service.Id));
+                chosenServices.Add(this.data.Services.First(s => s.Id == service.Id));
             }
 
-            foreach (var service in choseServices)
+            foreach (var service in chosenServices)
             {
                 reservation.ReservationServices.Add(new ReservationService
                 {
@@ -104,25 +113,6 @@
             this.data.SaveChanges();
 
             return RedirectToAction("Index");
-        }
-
-        public IActionResult Upcoming()
-        {
-            var reservations = this.data.Reservations
-                .Select(a => new ReservationsUpcomingListModel
-                {
-                    CabinNumber = a.CabinId,
-                    NumberOfPeople = a.NumberOfPeople,
-                    ReservedFrom = a.ReservedFrom,
-                    ReservationServices = a.ReservationServices
-                    .Select(rs => new ServiceListViewModel
-                    {
-                        Description = rs.Service.Description
-                    }),
-                })
-                .ToList();
-
-            return View(reservations);
         }
 
         private bool isCabinAvailable(int cabinId, DateTime From, DateTime Until)

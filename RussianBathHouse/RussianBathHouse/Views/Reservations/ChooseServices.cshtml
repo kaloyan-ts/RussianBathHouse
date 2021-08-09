@@ -4,7 +4,7 @@
 @{ 
     Model.ReservationId = Model.ReservationId;
 }
-    <form method="POST" asp-action="ChooseServices">
+    <form method="POST" class="text-center" asp-action="ChooseServices">
         <div class="form-group">
             <div class="form-check">
                 @foreach (var service in Model.Services)
@@ -16,7 +16,7 @@
                 }
             </div>
             <input type="hidden" asp-for="ReservationId" name="ReservationId" value="@Model.ReservationId">
-            <button type="submit" class="btn btn-primary"
+            <button type="submit" class="btn btn-primary mt-4 text-center"
                     asp-controller="Reservations" asp-action="ChooseServices">
                 Save
             </button>

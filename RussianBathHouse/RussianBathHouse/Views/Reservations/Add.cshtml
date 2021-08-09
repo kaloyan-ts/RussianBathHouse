@@ -7,7 +7,7 @@
 
 <div class="row">
     <div class="col-sm-12 offset-lg-2 col-lg-8 offset-xl-3 col-xl-6">
-        <form method="POST" action="Add">
+        <form method="POST" asp-action="Add">
             <div class="form-group">
                 <label asp-for="@Model.NumberOfPeople"></label>
                 <input asp-for="@Model.NumberOfPeople" type="number" class="form-control" placeholder="Enter number of people">
@@ -24,53 +24,16 @@
                 <span asp-validation-for="@Model.ReserveForHours" class="small text-danger"></span>
             </div>
 
-            <button type="submit" class="btn btn-primary">Choose Services</button>
+            <button type="submit"  class="btn btn-primary">Choose Services</button>
         </form>
     </div>
 </div>
 
-<div id="demo-booking-single"></div>
-@section Scripts{
-    var min = '2021-07-24T00:00';
-    var max = '2022-01-24T00:00';
-
-    mobiscroll.datepicker('#demo-booking-single', {
-    controls: ['calendar'],
-    min: min,
-    max: max,
-    onPageLoading: function (event, inst) {
-    getPrices(event.firstDay, function callback(bookings) {
-    inst.setOptions({
-    labels: bookings.labels,
-    invalid: bookings.invalid
-    });
-    });
-    }
-    });
-
-    function getPrices(d, callback) {
-    var invalid = [],
-    labels = [];
-
-    mobiscroll.util.http.getJson('//trial.mobiscroll.com/getprices/?year=' + d.getFullYear() + '&month=' + d.getMonth(), function (bookings) {
-    for (var i = 0; i < bookings.length; ++i) {
-    var booking = bookings[i],
-    d = new Date(booking.d);
-
-    if (booking.price > 0) {
-    labels.push({
-    start: d,
-    title: '$' + booking.price,
-    textColor: '#e1528f'
-    });
-    } else {
-    invalid.push(d);
-    }
-    }
-    callback({ labels: labels, invalid: invalid });
-    }, 'jsonp');
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
 }
-}
+
+
 
 
 

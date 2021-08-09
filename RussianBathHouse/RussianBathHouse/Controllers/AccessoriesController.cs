@@ -1,7 +1,6 @@
 ﻿namespace RussianBathHouse.Controllers
 {
     using Microsoft.AspNetCore.Mvc;
-    using RussianBathHouse.Data;
     using RussianBathHouse.Models.Accessories;
     using RussianBathHouse.Services.Accessories;
 
@@ -15,8 +14,6 @@
 
             this.accessories = accessories;
         }
-
-
 
         public IActionResult Index()
         {

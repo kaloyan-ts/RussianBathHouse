@@ -43,6 +43,12 @@
                .WithMany(r => r.ReservationServices)
                .HasForeignKey(r => r.ReservationId)
                .OnDelete(DeleteBehavior.Cascade);
+
+            builder.Entity<Reservation>()
+                .HasOne<ApplicationUser>()
+                .WithMany(r => r.Reservations)
+                .HasForeignKey(u => u.UserId)
+                .OnDelete(DeleteBehavior.Restrict);
           
            base.OnModelCreating(builder);
         }

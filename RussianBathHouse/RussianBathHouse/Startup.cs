@@ -3,6 +3,7 @@ namespace RussianBathHouse
     using Microsoft.AspNetCore.Builder;
     using Microsoft.AspNetCore.Hosting;
     using Microsoft.AspNetCore.Identity;
+    using Microsoft.AspNetCore.Mvc;
     using Microsoft.EntityFrameworkCore;
     using Microsoft.Extensions.Configuration;
     using Microsoft.Extensions.DependencyInjection;
@@ -11,6 +12,7 @@ namespace RussianBathHouse
     using RussianBathHouse.Data.Models;
     using RussianBathHouse.Infrastructure;
     using RussianBathHouse.Services.Accessories;
+    using RussianBathHouse.Services.Reservations;
 
     public class Startup
     {
@@ -26,6 +28,7 @@ namespace RussianBathHouse
 
             services.AddDatabaseDeveloperPageExceptionFilter();
 
+
             services
                 .AddDefaultIdentity<ApplicationUser>(options =>
                 {
@@ -34,12 +37,18 @@ namespace RussianBathHouse
                     options.Password.RequireNonAlphanumeric = false;
                     options.Password.RequireUppercase = false;
                 })
+                .AddRoles<IdentityRole>()
                 .AddEntityFrameworkStores<BathHouseDbContext>();
 
             services
-                .AddControllersWithViews();
+                .AddControllersWithViews(options =>
+                {
+                    options.Filters.Add<AutoValidateAntiforgeryTokenAttribute>();
+                });
 
             services.AddTransient<IAccessoriesService, AccessoriesService>();
+            services.AddTransient<IReservationsService, ReservationsService>();
+
 
         }
 

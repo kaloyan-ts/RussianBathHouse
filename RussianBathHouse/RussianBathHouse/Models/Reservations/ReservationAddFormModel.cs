@@ -11,7 +11,7 @@
         [Range(ReservationMinPeople, ReservationMaxPeople)]
         public int NumberOfPeople { get; set; }
 
-        [Range(typeof(DateTime), ReservationMinYear, ReservationMaxYear)]
+        [DataType(DataType.DateTime)]
         public DateTime ReserveFrom { get; set; }
 
         [Required]

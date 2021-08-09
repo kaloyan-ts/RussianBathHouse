@@ -64,17 +64,17 @@
     <div class="card-group">
         @foreach (var accessory in Model.Accessories)
         {
-        <div class="card m-3">
-            <img class="card-img-top" src=@accessory.Image alt="Card image cap">
-            <div class="card-body">
-                <h5 class="card-title">@accessory.Name</h5>
+            <div class="card m-3">
+                <img class="card-img-top" src=@accessory.Image alt="Card image cap">
+                <div class="card-body">
+                    <h5 class="card-title">@accessory.Name</h5>
+                </div>
+                <ul class="list-group list-group-flush">
+                    <li class="list-group-item">Price: @accessory.Price $</li>
+                </ul>
+                <a type="button" role="button" class="btn btn-success btn-sm m-2" asp-action="Buy" asp-route-id="@accessory.Id">Buy</a>
+                <a type="button" role="button" class="btn btn-primary btn-sm m-2" asp-action="Details" asp-route-id="@accessory.Id">Details</a>
             </div>
-            <ul class="list-group list-group-flush">
-                <li class="list-group-item">Price: @accessory.Price $</li>
-            </ul>
-            <a type="button" role="button" class="btn btn-success btn-sm m-2" asp-action="Buy" asp-route-id="@accessory.Id">Buy</a>
-            <a type="button" role="button" class="btn btn-primary btn-sm m-2" asp-action="Details" asp-route-id="@accessory.Id">Details</a>
-        </div>
         }
     </div>
 </div>

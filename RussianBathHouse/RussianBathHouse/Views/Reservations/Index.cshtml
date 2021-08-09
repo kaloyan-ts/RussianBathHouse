@@ -1,2 +1,36 @@
-﻿<a class="btn btn-success btn-block" asp-controller="Reservations" asp-action="Add" role="button">Make a reservation</a>
-<a class="btn btn-info btn-block" asp-controller="Reservations" asp-action="Upcoming" role="button">See Upcoming Reservations</a>
+﻿@model List<ReservationsUpcomingListModel>
+@{
+    ViewData["Title"] = "Reservations";
+}
+
+<a class="btn btn-success btn-block m-3" asp-controller="Reservations" asp-action="Add" role="button">Make a reservation</a>
+
+@if (Model.Any())
+{
+    <div class="card-group text-center">
+        @foreach (var reservation in Model)
+        {
+            <div class="card col-4">
+                <div class="card-body">
+                    <h5 class="card-title">Reservation:</h5>
+                    <p class="card-text">Services chosen:</p>
+                    <ul class="list-group-horizontal">
+                        @foreach (var service in reservation.ReservationServices)
+                        {
+                            <li class="list-group-item">@service.Description</li>
+                        }
+                    </ul>
+                </div>
+                <ul class="list-group list-group-flush">
+                    <li class="list-group-item">Number of People: @reservation.NumberOfPeople</li>
+                    <li class="list-group-item">Date of reservation: @reservation.ReservedFrom</li>
+                    <li class="list-group-item">Cabin: @reservation.CabinNumber</li>
+                </ul>
+            </div>
+        }
+    </div>
+}
+else
+{
+    <h3 class=" alert-heading text-center">You Have not made any reservaions for the upcoming days!</h3>
+}

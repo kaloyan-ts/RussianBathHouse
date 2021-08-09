@@ -23,7 +23,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Compile Include="Areas\Identity\IdentityHostingStartup.cs" />
+    <Compile Include="Areas\Admin\AdminConstants.cs" />
     <Compile Include="Areas\Identity\Pages\Account\Register.cshtml.cs" />
   </ItemGroup>
 

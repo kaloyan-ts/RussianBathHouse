@@ -2,6 +2,7 @@
 {
     using System;
     using System.Collections.Generic;
+    using System.ComponentModel.DataAnnotations;
 
     public class Reservation
     {
@@ -20,7 +21,11 @@
 
         public DateTime ReservedFrom { get; set; }
 
+        [Required]
         public DateTime ReservedUntill { get; set; }
+
+        [Required]
+        public string UserId { get; set; }
 
         public ICollection<ReservationService> ReservationServices { get; set; }
     }
