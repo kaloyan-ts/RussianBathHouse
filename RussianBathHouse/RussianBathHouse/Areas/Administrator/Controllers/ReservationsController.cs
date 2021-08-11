@@ -22,6 +22,7 @@
 
         public IActionResult All()
         {
+
             var allReservations = reservations.All();
 
             return View(allReservations);
