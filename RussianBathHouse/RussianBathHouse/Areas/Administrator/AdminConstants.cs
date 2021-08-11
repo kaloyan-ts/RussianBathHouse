@@ -1,4 +1,4 @@
-﻿namespace RussianBathHouse.Areas.Admin
+﻿namespace RussianBathHouse.Areas.Administrator
 {
     public static class AdminConstants
     {

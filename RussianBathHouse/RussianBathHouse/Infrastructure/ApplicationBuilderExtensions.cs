@@ -10,7 +10,7 @@
     using System.Linq;
     using System.Threading.Tasks;
 
-    using static Areas.Admin.AdminConstants;
+    using static Areas.Administrator.AdminConstants;
     public static class ApplicationBuilderExtensions
     {
         public static IApplicationBuilder PrepareDatabase(this IApplicationBuilder app)
@@ -37,6 +37,8 @@
         {
             var data = services.GetService<BathHouseDbContext>();
 
+
+            
 
             if (data.Cabins.Any())
             {

@@ -2,6 +2,7 @@
 {
     using Microsoft.AspNetCore.Authorization;
     using Microsoft.AspNetCore.Mvc;
+    using Newtonsoft.Json;
     using RussianBathHouse.Data;
     using RussianBathHouse.Data.Models;
     using RussianBathHouse.Infrastructure;
@@ -10,7 +11,9 @@
     using RussianBathHouse.Services.Reservations;
     using System;
     using System.Collections.Generic;
+    using System.Data;
     using System.Linq;
+    using System.Threading.Tasks;
 
     [Authorize]
     public class ReservationsController : Controller
@@ -26,40 +29,43 @@
 
         public IActionResult Index()
         {
-            var upcomingReservationsForUser = reservations.Upcoming(this.User.Id());
+            var upcomingReservations = new List<ReservationsUpcomingListModel>();
 
-            return View(upcomingReservationsForUser);
+            if (this.User.IsAdmin())
+            {
+                upcomingReservations = reservations.All();
+            }
+            else
+            {
+                upcomingReservations = reservations.Upcoming(this.User.Id());
+            }
+
+            return View(upcomingReservations);
         }
 
         public IActionResult Add()
         {
-            return View();
+            var reservations = this.data.Reservations.Select(r => new ReservedDayAndHoursViewModel
+            {
+                Date = r.ReservedFrom,
+            });
+
+            var model = new ReservationAddFormModel
+            {
+                Reserved = reservations
+            };
+
+            return View(model);
         }
 
         [HttpPost]
-        public IActionResult Add(ReservationAddFormModel reservationModel)
+        public IActionResult Add(DateAndTimeId model)
         {
-            if (!ModelState.IsValid)
-            {
-                return View(reservationModel);
-            }
-
-            var cabinForReservation = this.data.Cabins
-                .Where(c => c.Capacity == reservationModel.NumberOfPeople
-                || c.Capacity > reservationModel.NumberOfPeople)
-                //&& c.Reservations.Where(r => DateTime.Compare())
-                .Select(c => c.Id).First();
-
-            //isCabinAvailable()
+            var id = model.DateAndTime;
 
             var reservation = new Reservation
             {
                 UserId = this.User.Id(),
-                NumberOfPeople = reservationModel.NumberOfPeople,
-                CabinId = cabinForReservation,
-                ReservedFrom = reservationModel.ReserveFrom,
-                ReservedUntill = reservationModel.ReserveFrom.AddHours(reservationModel.ReserveForHours),
-
             };
 
             this.data.Reservations.Add(reservation);
@@ -72,6 +78,7 @@
         {
             var model = new ReservationsServicesListingModel
             {
+
                 Services = GetReservationServices(),
                 ReservationId = id
             };
@@ -82,6 +89,8 @@
         [HttpPost]
         public IActionResult ChooseServices(ReservationsServicesListingModel servicesModel)
         {
+
+            var id = TempData["id"];
 
             var reservation = this.data.Reservations.FirstOrDefault(r => r.Id == servicesModel.ReservationId);
 
@@ -101,6 +110,8 @@
 
                 chosenServices.Add(this.data.Services.First(s => s.Id == service.Id));
             }
+
+            reservation.NumberOfPeople = servicesModel.NumberOfPeople;
 
             foreach (var service in chosenServices)
             {

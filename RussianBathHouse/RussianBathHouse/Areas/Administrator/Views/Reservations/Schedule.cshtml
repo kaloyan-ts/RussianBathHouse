@@ -1,0 +1,195 @@
+﻿@model List<ReservedDayAndHoursViewModel>
+
+@{
+    ViewData["Title"] = "Schedule of all Reservations";
+}
+
+@{
+    var timeList = new List<DateTime>();
+
+
+    var today0AsDayOfWeek = @DateTime.Today.DayOfWeek;
+    var today0AsDate = @DateTime.Today.Date;
+
+    var today1AsDayOfWeek = @DateTime.Today.AddDays(1.0).DayOfWeek;
+    var today1AsDate = @DateTime.Today.AddDays(1.0).Date;
+
+    var today2AsDayOfWeek = @DateTime.Today.AddDays(2.0).DayOfWeek;
+    var today2AsDate = @DateTime.Today.AddDays(2.0).Date;
+
+    var today3AsDayOfWeek = @DateTime.Today.AddDays(3.0).DayOfWeek;
+    var today3AsDate = @DateTime.Today.AddDays(3.0).Date;
+
+    var today4AsDayOfWeek = @DateTime.Today.AddDays(4.0).DayOfWeek;
+    var today4AsDate = @DateTime.Today.AddDays(4.0).Date;
+
+    var today5AsDayOfWeek = @DateTime.Today.AddDays(5.0).DayOfWeek;
+    var today5AsDate = @DateTime.Today.AddDays(5.0).Date;
+
+    var today6AsDayOfWeek = @DateTime.Today.AddDays(6.0).DayOfWeek;
+    var today6AsDate = @DateTime.Today.AddDays(6.0).Date;
+
+
+    var timespan0 = today0AsDate.AddHours(8.00);
+    timeList.Add(timespan0);
+    var timespan1 = today1AsDate.AddHours(10.00);
+    timeList.Add(timespan1);
+    var timespan2 = today2AsDate.AddHours(12.00);
+    timeList.Add(timespan2);
+    var timespan3 = today3AsDate.AddHours(14.00);
+    timeList.Add(timespan3);
+    var timespan4 = today4AsDate.AddHours(16.00);
+    timeList.Add(timespan4);
+    var timespan5 = today5AsDate.AddHours(18.00);
+    timeList.Add(timespan5);
+    var timespan6 = today6AsDate.AddHours(20.00);
+    timeList.Add(timespan6);
+
+}
+
+<table class="table table-bordered">
+    <caption>Available hours for this week</caption>
+    <thead>
+        <tr>
+            <th scope="col">Day</th>
+            <th scope="col">8:00 - 10:00</th>
+            <th scope="col">10:00 - 12:00</th>
+            <th scope="col">12:00 - 14:00</th>
+            <th scope="col">14:00 - 16:00</th>
+            <th scope="col">16:00 - 18:00</th>
+            <th scope="col">18:00 - 20:00</th>
+            <th scope="col">20:00 - 22:00</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <th scope="row">@today0AsDayOfWeek - @today0AsDate.ToShortDateString()</th>
+            @{
+                var reservationsForThisDay = Model.Where(r => r.Date.Date.CompareTo(today0AsDate.Date) == 0).ToList();
+            }
+            @for (int i = 0; i < 7; i++)
+            {
+                if (reservationsForThisDay.Any(r => r.Date.TimeOfDay == timeList[i].TimeOfDay))
+                {
+                    <td class="alert-danger disabled">Reserved</td>
+                }
+                else
+                {
+                    <td class="active" id="0 + @(i)">Free</td>
+                }
+            }
+        </tr>
+        <tr>
+            <th scope="row">@today1AsDayOfWeek - @today1AsDate.ToShortDateString()</th>
+            @{
+
+                reservationsForThisDay = Model.Where(r => r.Date.Date.CompareTo(today1AsDate.Date) == 0).ToList(); 
+            }
+            @for (int i = 0; i < 7; i++)
+            {
+                if (reservationsForThisDay.Any(r => r.Date.TimeOfDay.Hours == timeList[i].TimeOfDay.Hours))
+                {
+                    <td class="alert-danger disabled">Reserved</td>
+                }
+                else
+                {
+                    <td class="active" id="0 + @(i)">Free</td>
+                }
+            }
+        <tr>
+        <tr>
+            <th scope="row">@today2AsDayOfWeek - @today2AsDate.ToShortDateString()</th>
+            @{
+
+                reservationsForThisDay = Model.Where(r => r.Date.Date.CompareTo(today2AsDate.Date) == 0).ToList();
+            }
+            @for (int i = 0; i < 7; i++)
+            {
+                if (reservationsForThisDay.Any(r => r.Date.TimeOfDay.Hours == timeList[i].TimeOfDay.Hours))
+                {
+                    <td class="alert-danger disabled">Reserved</td>
+                }
+                else
+                {
+                    <td class="active" id="0 + @(i)">Free</td>
+                }
+            }
+        </tr>
+        <tr>
+            <th scope="row">@today3AsDayOfWeek - @today3AsDate.ToShortDateString()</th>
+            @{
+
+                reservationsForThisDay = Model.Where(r => r.Date.Date.CompareTo(today3AsDate.Date) == 0).ToList();
+            }
+            @for (int i = 0; i < 7; i++)
+            {
+
+                if (reservationsForThisDay.Any(r => r.Date.TimeOfDay.Hours == timeList[i].TimeOfDay.Hours))
+                {
+                    <td class="alert-danger disabled">Reserved</td>
+                }
+                else
+                {
+                    <td class="active" id="0 + @(i)">Free</td>
+                }
+            }
+        </tr>
+        <tr>
+            <th scope="row">@today4AsDayOfWeek - @today4AsDate.ToShortDateString()</th>
+            @{
+
+                reservationsForThisDay = Model.Where(r => r.Date.Date.CompareTo(today4AsDate.Date) == 0).ToList();
+            }
+            @for (int i = 0; i < 7; i++)
+            {
+
+                if (reservationsForThisDay.Any(r => r.Date.TimeOfDay.Hours == timeList[i].TimeOfDay.Hours))
+                {
+                    <td class="alert-danger disabled">Reserved</td>
+                }
+                else
+                {
+                    <td class="active" id="0 + @(i)">Free</td>
+                }
+            }
+        </tr>
+        <tr>
+            <th scope="row">@today5AsDayOfWeek - @today5AsDate.ToShortDateString()</th>
+            @{
+
+                reservationsForThisDay = Model.Where(r => r.Date.Date.CompareTo(today5AsDate.Date) == 0).ToList();
+            }
+            @for (int i = 0; i < 7; i++)
+            {
+
+                if (reservationsForThisDay.Any(r => r.Date.TimeOfDay.Hours == timeList[i].TimeOfDay.Hours))
+                {
+                    <td class="alert-danger disabled">Reserved</td>
+                }
+                else
+                {
+                    <td class="active" id="0 + @(i)">Free</td>
+                }
+            }
+        </tr>
+        <tr>
+            <th scope="row">@today6AsDayOfWeek - @today6AsDate.ToShortDateString()</th>
+            @{
+
+                reservationsForThisDay = Model.Where(r => r.Date.Date.CompareTo(today6AsDate.Date) == 0).ToList();
+            }
+            @for (int i = 0; i < 7; i++)
+            {
+                if (reservationsForThisDay.Any(r => r.Date.TimeOfDay.Hours == timeList[i].TimeOfDay.Hours))
+                {
+                    <td class="alert-danger disabled">Reserved</td>
+                }
+                else
+                {
+                    <td class="active" id="0 + @(i)">Free</td>
+                }
+            }
+            }
+        </tr>
+    </tbody>
+</table>

@@ -1,24 +1,29 @@
 ﻿@model ReservationsServicesListingModel
 
 
-@{ 
+@{
     Model.ReservationId = Model.ReservationId;
 }
-    <form method="POST" class="text-center" asp-action="ChooseServices">
-        <div class="form-group">
-            <div class="form-check">
-                @foreach (var service in Model.Services)
-                {
-                    <input type="checkbox" name="Services[@service.Id].Id" value="@service.Id" />
-                    <input type="hidden" name="Services.Index" value="@service.Id" />
-                    @service.Description
-                    <br />
-                }
-            </div>
-            <input type="hidden" asp-for="ReservationId" name="ReservationId" value="@Model.ReservationId">
-            <button type="submit" class="btn btn-primary mt-4 text-center"
-                    asp-controller="Reservations" asp-action="ChooseServices">
-                Save
-            </button>
+<form method="POST" class="text-center" asp-action="ChooseServices">
+    <div class="form-group">
+        <div class="form-check">
+            @foreach (var service in Model.Services)
+            {
+                <input type="checkbox" name="Services[@service.Id].Id" value="@service.Id" />
+                <input type="hidden" name="Services.Index" value="@service.Id" />
+                @service.Description
+                <br />
+            }
         </div>
-    </form>
+        <input type="hidden" asp-for="ReservationId" name="ReservationId" value="@Model.ReservationId">
+        <div class="form-group">
+            <label asp-for="@Model.NumberOfPeople"></label>
+            <input asp-for="@Model.NumberOfPeople" type="number" class="form-control" placeholder="Enter number of people">
+            <span asp-validation-for="@Model.NumberOfPeople" class="small text-danger"></span>
+        </div>
+        <button type="submit" class="btn btn-primary mt-4 text-center"
+                asp-controller="Reservations" asp-action="ChooseServices">
+            Save
+        </button>
+    </div>
+</form>

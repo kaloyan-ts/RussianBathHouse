@@ -23,8 +23,21 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Compile Include="Areas\Admin\AdminConstants.cs" />
+    <Compile Include="Areas\Administrator\Controllers\AdministratorController.cs" />
+    <Compile Include="Areas\Administrator\Controllers\ReservationsController.cs" />
+    <Compile Include="Areas\Administrator\AdminConstants.cs" />
     <Compile Include="Areas\Identity\Pages\Account\Register.cshtml.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Include="Areas\Administrator\Views\_ViewImports.cshtml">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Include="Areas\Administrator\Views\_ViewStart.cshtml">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
   </ItemGroup>
 
   <ItemGroup>
@@ -45,6 +58,8 @@
   </ItemGroup>
 
   <ItemGroup>
+    <None Include="Areas\Administrator\Views\Reservations\All.cshtml" />
+    <None Include="Areas\Administrator\Views\Reservations\Schedule.cshtml" />
     <None Include="Areas\Identity\Pages\Account\Register.cshtml" />
     <None Include="Areas\Identity\Pages\Account\_ViewImports.cshtml" />
     <None Include="Areas\Identity\Pages\_ValidationScriptsPartial.cshtml" />

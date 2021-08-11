@@ -75,8 +75,16 @@ namespace RussianBathHouse
                 .UseEndpoints(endpoints =>
             {
                 endpoints.MapControllerRoute(
-                    name: "default",
-                    pattern: "{controller=Home}/{action=Index}/{id?}");
+                       name: "Administrator Area",
+                       pattern: "{area}/{controller}/{action}",
+                       defaults: new
+                       {
+                           area = "",
+                           controller = "Reservations",
+                           action = "All"
+                       });
+
+                endpoints.MapDefaultControllerRoute();
                 endpoints.MapRazorPages();
             });
         }

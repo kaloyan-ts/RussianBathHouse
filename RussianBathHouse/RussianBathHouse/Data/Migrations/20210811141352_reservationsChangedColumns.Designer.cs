@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using RussianBathHouse.Data;
 
-namespace RussianBathHouse.Data.Migrations
+namespace RussianBathHouse.Migrations
 {
     [DbContext(typeof(BathHouseDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20210811141352_reservationsChangedColumns")]
+    partial class reservationsChangedColumns
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -282,8 +284,11 @@ namespace RussianBathHouse.Data.Migrations
                     b.Property<int>("NumberOfPeople")
                         .HasColumnType("int");
 
-                    b.Property<DateTime>("ReservedFrom")
+                    b.Property<DateTime>("ReservedDate")
                         .HasColumnType("datetime2");
+
+                    b.Property<TimeSpan>("ReservedHours")
+                        .HasColumnType("time");
 
                     b.Property<string>("UserId")
                         .IsRequired()

@@ -1,9 +1,7 @@
 ﻿@model List<ReservationsUpcomingListModel>
 @{
-    ViewData["Title"] = "Your Reservations";
+    ViewData["Title"] = "All Reservations";
 }
-
-<a class="btn btn-success btn-block m-3" asp-controller="Reservations" asp-action="Add" role="button">Make a reservation</a>
 
 @if (Model.Any())
 {
@@ -32,5 +30,5 @@
 }
 else
 {
-    <h3 class=" alert-heading text-center">You Have not made any reservaions for the upcoming days!</h3>
+    <h3 class=" alert-heading text-center">There aren't any reservaions for the upcoming days!</h3>
 }
