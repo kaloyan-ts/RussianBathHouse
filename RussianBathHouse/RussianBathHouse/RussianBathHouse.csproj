@@ -23,6 +23,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Compile Include="Areas\Administrator\Controllers\AccessoriesController.cs" />
     <Compile Include="Areas\Administrator\Controllers\AdministratorController.cs" />
     <Compile Include="Areas\Administrator\Controllers\ReservationsController.cs" />
     <Compile Include="Areas\Administrator\AdminConstants.cs" />
@@ -30,6 +31,8 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Content Include="Areas\Administrator\Views\Accessories\Add.cshtml" />
+    <Content Include="Areas\Administrator\Views\Accessories\Edit.cshtml" />
     <Content Include="Areas\Administrator\Views\_ViewImports.cshtml">
       <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
       <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>

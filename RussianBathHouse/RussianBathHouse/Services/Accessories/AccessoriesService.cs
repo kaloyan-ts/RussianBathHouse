@@ -1,24 +1,17 @@
 ﻿namespace RussianBathHouse.Services.Accessories
 {
-    using Microsoft.AspNetCore.Identity;
     using RussianBathHouse.Data;
     using RussianBathHouse.Data.Models;
     using RussianBathHouse.Models.Accessories;
-    using RussianBathHouse.Services.Users;
     using System.Linq;
-    using System.Threading.Tasks;
 
     public class AccessoriesService : IAccessoriesService
     {
         private readonly BathHouseDbContext data;
-        private readonly UserManager<ApplicationUser> userManager;
-        private readonly IUsersService users;
 
-        public AccessoriesService(BathHouseDbContext data, UserManager<ApplicationUser> userManager, IUsersService users)
+        public AccessoriesService(BathHouseDbContext data)
         {
             this.data = data;
-            this.userManager = userManager;
-            this.users = users;
         }
 
         public string Add(string imagePath, string name, decimal price, int quantityLeft, string description)
@@ -142,20 +135,6 @@
             this.data.SaveChanges();
         }
 
-        public async Task SetAddressAndPhoneNumber(string id, string phoneNumber, string address)
-        {
-            if (await users.GetUserPhoneNumber(id) != null)
-            {
-                return;
-            }
 
-            var user = await userManager.FindByIdAsync(id);
-
-            await this.userManager.SetPhoneNumberAsync(user, phoneNumber);
-
-            user.Address = address;
-
-            this.data.SaveChanges();
-        }
     }
 }

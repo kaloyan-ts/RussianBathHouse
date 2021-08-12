@@ -3,6 +3,7 @@
     using RussianBathHouse.Data;
     using RussianBathHouse.Models.Reservations;
     using RussianBathHouse.Models.Services;
+    using System;
     using System.Collections.Generic;
     using System.Linq;
 
@@ -18,6 +19,7 @@
         public List<ReservationsUpcomingListModel> All()
         {
             var reservations = this.data.Reservations
+                .Where(r => r.ReservedFrom.CompareTo(DateTime.Now) > 0)
                 .Select(a => new ReservationsUpcomingListModel
                 {
                     ReservedFrom =a.ReservedFrom,

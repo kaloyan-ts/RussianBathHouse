@@ -5,21 +5,23 @@
     using RussianBathHouse.Infrastructure;
     using RussianBathHouse.Models.Accessories;
     using RussianBathHouse.Services.Accessories;
+    using RussianBathHouse.Services.Users;
     using System.Threading.Tasks;
-    using static WebConstants;
 
     public class AccessoriesController : Controller
     {
         private readonly IAccessoriesService accessories;
+        private readonly IUsersService users;
 
-        public AccessoriesController(IAccessoriesService accessories)
+        public AccessoriesController(IAccessoriesService accessories, IUsersService users)
         {
             this.accessories = accessories;
+            this.users = users;
         }
 
         public IActionResult Index()
         {
-            return Redirect("Accessories/All");
+            return RedirectToAction("All");
         }
 
         public IActionResult All([FromQuery] AccessoriesQueryModel query)
@@ -30,76 +32,6 @@
                 AccessoriesQueryModel.AccessoriesPerPage);
 
             return View(query);
-        }
-
-        [Authorize(Roles = AdministratorRoleName)]
-        public IActionResult Add()
-        {
-            return View();
-        }
-
-        [Authorize(Roles = AdministratorRoleName)]
-        [HttpPost]
-        public IActionResult Add(AccessoryAddFormModel accessoryModel)
-        {
-            if (!ModelState.IsValid)
-            {
-                return View(accessoryModel);
-            }
-
-            accessories.Add(accessoryModel.ImagePath,
-                accessoryModel.Name,
-                accessoryModel.Price,
-                accessoryModel.Quantity,
-                accessoryModel.Description);
-
-            return RedirectToAction("All");
-        }
-
-
-        public IActionResult Delete(string Id)
-        {
-            this.accessories.Remove(Id);
-
-            return RedirectToAction("All");
-        }
-
-
-        [Authorize(Roles = AdministratorRoleName)]
-        public IActionResult Edit(string Id)
-        {
-            var accessory = this.accessories.FindById(Id);
-
-            if (accessory == null)
-            {
-                return BadRequest();
-            }
-
-            var accessoryModel = new AccessoryEditFormModel
-            {
-                Id = accessory.Id,
-                Name = accessory.Name,
-                Description = accessory.Description,
-                ImagePath = accessory.ImagePath,
-                Price = accessory.Price,
-                Quantity = accessory.QuantityLeft
-            };
-
-            return View(accessoryModel);
-        }
-
-        [Authorize(Roles = AdministratorRoleName)]
-        [HttpPost]
-        public IActionResult Edit(AccessoryEditFormModel changedAccessory)
-        {
-            this.accessories.Edit(changedAccessory.Id,
-                changedAccessory.Description,
-                changedAccessory.ImagePath,
-                changedAccessory.Name,
-                changedAccessory.Price,
-                changedAccessory.Quantity);
-
-            return RedirectToAction("All");
         }
 
         public IActionResult Details(string Id)
@@ -142,7 +74,7 @@
 
             string userId = this.User.Id();
 
-            await accessories.SetAddressAndPhoneNumber(userId, model.PhoneNumber, model.Address);
+            await users.SetAddressAndPhoneNumber(userId, model.PhoneNumber, model.Address);
 
             return RedirectToAction("All");
         }

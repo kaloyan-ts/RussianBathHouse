@@ -1,10 +1,9 @@
 ﻿@model List<ReservedDayAndHoursViewModel>
 
 @{
-    ViewData["Title"] = "Schedule of all Reservations";
-}
 
-@{
+    ViewData["Title"] = "Schedule of all Reservations";
+
     var timeList = new List<DateTime>();
 
 
@@ -44,7 +43,6 @@
     timeList.Add(timespan5);
     var timespan6 = today6AsDate.AddHours(20.00);
     timeList.Add(timespan6);
-
 }
 
 <table class="table table-bordered">

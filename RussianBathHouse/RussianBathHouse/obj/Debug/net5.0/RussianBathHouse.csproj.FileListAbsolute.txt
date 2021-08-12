@@ -439,9 +439,7 @@ D:\Kaloyan\asp.net project identity\RussianBathHouse\RussianBathHouse\bin\Debug\
 D:\Kaloyan\asp.net project identity\RussianBathHouse\RussianBathHouse\bin\Debug\net5.0\zh-Hant\Microsoft.CodeAnalysis.Workspaces.resources.dll
 D:\Kaloyan\asp.net project identity\RussianBathHouse\RussianBathHouse\bin\Debug\net5.0\runtimes\win-arm\lib\net5.0\dotnet-aspnet-codegenerator-design.exe
 D:\Kaloyan\asp.net project identity\RussianBathHouse\RussianBathHouse\bin\Debug\net5.0\runtimes\win-arm64\lib\net5.0\dotnet-aspnet-codegenerator-design.exe
-D:\Kaloyan\asp.net project identity\RussianBathHouse\RussianBathHouse\obj\Debug\net5.0\Razor\Views\Accessories\Add.cshtml.g.cs
 D:\Kaloyan\asp.net project identity\RussianBathHouse\RussianBathHouse\obj\Debug\net5.0\Razor\Views\Accessories\All.cshtml.g.cs
-D:\Kaloyan\asp.net project identity\RussianBathHouse\RussianBathHouse\obj\Debug\net5.0\Razor\Views\Accessories\Edit.cshtml.g.cs
 D:\Kaloyan\asp.net project identity\RussianBathHouse\RussianBathHouse\obj\Debug\net5.0\Razor\Views\Reservations\Add.cshtml.g.cs
 D:\Kaloyan\asp.net project identity\RussianBathHouse\RussianBathHouse\obj\Debug\net5.0\Razor\Views\Accessories\Details.cshtml.g.cs
 D:\Kaloyan\asp.net project identity\RussianBathHouse\RussianBathHouse\obj\Debug\net5.0\Razor\Views\Reservations\ChooseServices.cshtml.g.cs
@@ -449,3 +447,5 @@ D:\Kaloyan\asp.net project identity\RussianBathHouse\RussianBathHouse\obj\Debug\
 D:\Kaloyan\asp.net project identity\RussianBathHouse\RussianBathHouse\obj\Debug\net5.0\Razor\Areas\Administrator\Views\_ViewImports.cshtml.g.cs
 D:\Kaloyan\asp.net project identity\RussianBathHouse\RussianBathHouse\obj\Debug\net5.0\Razor\Areas\Administrator\Views\_ViewStart.cshtml.g.cs
 D:\Kaloyan\asp.net project identity\RussianBathHouse\RussianBathHouse\obj\Debug\net5.0\Razor\Views\Accessories\Buy.cshtml.g.cs
+D:\Kaloyan\asp.net project identity\RussianBathHouse\RussianBathHouse\obj\Debug\net5.0\Razor\Areas\Administrator\Views\Accessories\Add.cshtml.g.cs
+D:\Kaloyan\asp.net project identity\RussianBathHouse\RussianBathHouse\obj\Debug\net5.0\Razor\Areas\Administrator\Views\Accessories\Edit.cshtml.g.cs

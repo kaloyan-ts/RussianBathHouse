@@ -1,9 +1,8 @@
-﻿using RussianBathHouse.Data.Models;
-using RussianBathHouse.Models.Accessories;
-using System.Threading.Tasks;
-
-namespace RussianBathHouse.Services.Accessories
+﻿namespace RussianBathHouse.Services.Accessories
 {
+    using RussianBathHouse.Data.Models;
+    using RussianBathHouse.Models.Accessories;
+
     public interface IAccessoriesService
     {
         string Add(string imagePath, string name, decimal price, int quantity, string description);
@@ -20,7 +19,6 @@ namespace RussianBathHouse.Services.Accessories
 
         AccessoryDetailsViewModel Details(string id);
 
-        Task SetAddressAndPhoneNumber(string id, string phoneNumber, string address);
 
         void Edit(string id,
                 string description,

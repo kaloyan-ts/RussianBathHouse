@@ -1,16 +1,35 @@
 ﻿namespace RussianBathHouse.Services.Users
 {
     using Microsoft.AspNetCore.Identity;
+    using RussianBathHouse.Data;
     using RussianBathHouse.Data.Models;
     using System.Threading.Tasks;
 
     public class UsersService : IUsersService
     {
         private readonly UserManager<ApplicationUser> userManager;
+        private readonly BathHouseDbContext data;
 
-        public UsersService(UserManager<ApplicationUser> userManager)
+        public UsersService(UserManager<ApplicationUser> userManager, BathHouseDbContext data)
         {
             this.userManager = userManager;
+            this.data = data;
+        }
+
+        public async Task SetAddressAndPhoneNumber(string id, string phoneNumber, string address)
+        {
+            if (await this.GetUserPhoneNumber(id) != null)
+            {
+                return;
+            }
+
+            var user = await userManager.FindByIdAsync(id);
+
+            await this.userManager.SetPhoneNumberAsync(user, phoneNumber);
+
+            user.Address = address;
+
+            this.data.SaveChanges();
         }
 
         public async Task<string> GetUserAddress(string id)

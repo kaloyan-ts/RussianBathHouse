@@ -32,7 +32,7 @@
                 <input asp-for="@Model.Quantity" type="number" class="form-control" placeholder="@Model.Quantity">
                 <span asp-validation-for="@Model.Quantity" class="small text-danger"></span>
             </div>
-            <button type="submit" class="btn btn-primary" asp-action="Edit" asp-route-id="@Model.Id">Save</button>
+            <button type="submit" class="btn btn-primary" asp-area="Administrator" asp-action="Edit" asp-route-id="@Model.Id">Save</button>
         </form>
     </div>
 </div>

@@ -7,7 +7,7 @@
 
 <div class="row">
     <div class="col-sm-12 offset-lg-2 col-lg-8 offset-xl-3 col-xl-6">
-        <form method="POST" asp-action="Add">
+        <form method="POST" asp-area="Administrator" asp-action="Add">
             <div class="form-group">
                 <label asp-for="@Model.Name"></label>
                 <input asp-for="@Model.Name" type="text" class="form-control" placeholder="Enter name of accessory">
