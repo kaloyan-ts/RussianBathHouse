@@ -3,8 +3,11 @@
 @{
     ViewData["Title"] = "All Accessories";
 }
+@if (this.User.IsInRole(WebConstants.AdministratorRoleName))
+{
+    <a class="btn btn-primary btn-block mb-4 mt-4" asp-controller="Accessories" asp-action="Add" role="button">Add Accessory</a>
+}
 
-<a class="btn btn-primary btn-block mb-4 mt-4" asp-controller="Accessories" asp-action="Add" role="button">Add Accessory</a>
 
 <form method="get">
     <div class="row ">

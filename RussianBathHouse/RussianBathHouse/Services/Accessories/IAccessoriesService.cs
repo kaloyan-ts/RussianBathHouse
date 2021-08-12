@@ -1,5 +1,6 @@
 ﻿using RussianBathHouse.Data.Models;
 using RussianBathHouse.Models.Accessories;
+using System.Threading.Tasks;
 
 namespace RussianBathHouse.Services.Accessories
 {
@@ -19,11 +20,17 @@ namespace RussianBathHouse.Services.Accessories
 
         AccessoryDetailsViewModel Details(string id);
 
+        Task SetAddressAndPhoneNumber(string id, string phoneNumber, string address);
+
         void Edit(string id,
                 string description,
                 string imagePath,
                 string name,
                 decimal price,
-                int quantityLeft);    
+                int quantityLeft);
+
+        void Buy(string id, int desiredQuantity);
+
+        public bool EnoughQuantity(string id, int desiredQuantity);
     }
 }

@@ -13,6 +13,7 @@ namespace RussianBathHouse
     using RussianBathHouse.Infrastructure;
     using RussianBathHouse.Services.Accessories;
     using RussianBathHouse.Services.Reservations;
+    using RussianBathHouse.Services.Users;
 
     public class Startup
     {
@@ -48,7 +49,7 @@ namespace RussianBathHouse
 
             services.AddTransient<IAccessoriesService, AccessoriesService>();
             services.AddTransient<IReservationsService, ReservationsService>();
-
+            services.AddTransient<IUsersService, UsersService>();
 
         }
 

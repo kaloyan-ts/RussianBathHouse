@@ -48,7 +48,7 @@
 }
 <form method="POST" class="text-center" asp-action="Add" asp-controller="Reservations">
     <table class="table table-bordered">
-        <caption>Available hours for this week</caption>
+        <caption>Click on the desired free day and hour timespan</caption>
         <thead>
             <tr>
                 <th scope="col">Day</th>
@@ -194,7 +194,7 @@
         </tbody>
     </table>
     <button type="submit" class="btn btn-primary mt-4 text-center"
-            asp-controller="Reservations" asp-action="ChooseServices">
+            asp-controller="Reservations" asp-action="Add">
         Save
     </button>
 </form>
@@ -207,9 +207,25 @@
 
     <script>
         $(".active").on("click", ev => {
-
+            ev.preventDefault();
             ev.target.style = "background-color: #91ff80";
             ev.target.innerText = 'You reserved it!';
+            const data = { DateAndTime: ev.target.id };
+
+            fetch('/Reservations/Add', {
+                method: 'POST', 
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(data),
+            })
+                .then(response => response.json())
+                .then(data => {
+                    console.log('Success:', data);
+                })
+                .catch((error) => {
+                    console.error('Error:', error);
+                });
         });
 
     </script>

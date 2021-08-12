@@ -3,6 +3,12 @@
     using System;
     public class DataConstants
     {
+        public const int PhoneNumberMinLength = 7;
+        public const int PhoneNumberMaxLength = 15;
+
+        public const int AddressMinLength = 10;
+        public const int AddressMaxLength = 40;
+
         public const int AccessoryNameMaxLength = 50;
         public const int AccessoryNameMinLength = 2;
 

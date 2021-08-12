@@ -1,0 +1,46 @@
+﻿@model BuyFormModel
+@inject IUsersService users
+
+<div class="row">
+    <div class="col-sm-12 offset-lg-2 col-lg-8 offset-xl-3 col-xl-6">
+        <form method="POST" asp-action="Buy">
+            <div asp-validation-summary="ModelOnly"></div>
+            <h3>
+                In the next 3 days you will receive a call from the courirer firm which will inform you when will they deliver the product to you! Thank you for shopping in our site :)
+            </h3>
+            @{
+                var phoneNumber = await users.GetUserPhoneNumber(this.User.Id());
+            }
+            @if (phoneNumber == null)
+            {
+                <div class="form-group">
+                    <label>Please write your Phone Number here:</label>
+                    <input asp-for="@Model.PhoneNumber" class="form-control" placeholder="Your Phone Number">
+                    <span asp-validation-for="@Model.PhoneNumber" class="small text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label>Please write your Address here:</label>
+                    <textarea asp-for="@Model.Address" class="form-control" rows="3"></textarea>
+                    <span asp-validation-for="@Model.Address" class="small text-danger"></span>
+                </div>
+            }
+            @{
+                Model.PhoneNumber = phoneNumber;
+                Model.Address = await users.GetUserAddress(this.User.Id());
+            }
+            <div class="form-group mt-3">
+                <label asp-for="@Model.Quantity"></label>
+                <input asp-for="@Model.Quantity" type="number" class="form-control" placeholder="Enter the desired quantity">
+                <span asp-validation-for="@Model.Quantity" class="small text-danger"></span>
+            </div>
+            <input asp-for="@Model.AccessoryId" type="hidden">
+            <input asp-for="@Model.PhoneNumber" type="hidden">
+            <input asp-for="@Model.Address" type="hidden">
+            <button type="submit" asp-action="Buy" asp-route-id="@Model.AccessoryId" class="btn btn-primary">Buy</button>
+        </form>
+    </div>
+</div>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

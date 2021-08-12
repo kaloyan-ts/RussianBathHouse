@@ -54,8 +54,22 @@ using RussianBathHouse.Data.Models;
 #line default
 #line hidden
 #nullable disable
+#nullable restore
+#line 7 "D:\Kaloyan\asp.net project identity\RussianBathHouse\RussianBathHouse\Views\_ViewImports.cshtml"
+using RussianBathHouse.Services.Users;
+
+#line default
+#line hidden
+#nullable disable
+#nullable restore
+#line 8 "D:\Kaloyan\asp.net project identity\RussianBathHouse\RussianBathHouse\Views\_ViewImports.cshtml"
+using RussianBathHouse.Infrastructure;
+
+#line default
+#line hidden
+#nullable disable
     [global::Microsoft.AspNetCore.Razor.Hosting.RazorSourceChecksumAttribute(@"SHA1", @"590a334302eec3f8dacc27d95787db7c00573d41", @"/Views/Reservations/Index.cshtml")]
-    [global::Microsoft.AspNetCore.Razor.Hosting.RazorSourceChecksumAttribute(@"SHA1", @"21da8d510278a76ca74f44c5bb9b2635740cd4ab", @"/Views/_ViewImports.cshtml")]
+    [global::Microsoft.AspNetCore.Razor.Hosting.RazorSourceChecksumAttribute(@"SHA1", @"389444a88486c762febfa1e8754034d299e82fd4", @"/Views/_ViewImports.cshtml")]
     public class Views_Reservations_Index : global::Microsoft.AspNetCore.Mvc.Razor.RazorPage<List<ReservationsUpcomingListModel>>
     {
         private static readonly global::Microsoft.AspNetCore.Razor.TagHelpers.TagHelperAttribute __tagHelperAttribute_0 = new global::Microsoft.AspNetCore.Razor.TagHelpers.TagHelperAttribute("class", new global::Microsoft.AspNetCore.Html.HtmlString("btn btn-success btn-block m-3"), global::Microsoft.AspNetCore.Razor.TagHelpers.HtmlAttributeValueStyle.DoubleQuotes);
@@ -95,7 +109,7 @@ using RussianBathHouse.Data.Models;
 #line hidden
 #nullable disable
             WriteLiteral("\r\n");
-            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "590a334302eec3f8dacc27d95787db7c00573d415615", async() => {
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "590a334302eec3f8dacc27d95787db7c00573d416047", async() => {
                 WriteLiteral("Make a reservation");
             }
             );

@@ -6,7 +6,7 @@
 
 <div class="row">
     <div class="col-sm-12 offset-lg-2 col-lg-8 offset-xl-3 col-xl-6">
-        <form method="POST" action="Edit">
+        <form method="POST" asp-action="Edit">
             <div class="form-group">
                 <label asp-for="@Model.Name"></label>
                 <input asp-for="@Model.Name" type="text" class="form-control" placeholder="@Model.Name">
@@ -32,7 +32,7 @@
                 <input asp-for="@Model.Quantity" type="number" class="form-control" placeholder="@Model.Quantity">
                 <span asp-validation-for="@Model.Quantity" class="small text-danger"></span>
             </div>
-            <button type="submit" class="btn btn-primary" asp-route-id="@Model.Id">Save</button>
+            <button type="submit" class="btn btn-primary" asp-action="Edit" asp-route-id="@Model.Id">Save</button>
         </form>
     </div>
 </div>

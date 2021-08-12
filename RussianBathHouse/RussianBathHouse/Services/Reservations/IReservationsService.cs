@@ -8,7 +8,5 @@
         List<ReservationsUpcomingListModel> Upcoming(string id);
 
         List<ReservationsUpcomingListModel> All();
-
-
     }
 }

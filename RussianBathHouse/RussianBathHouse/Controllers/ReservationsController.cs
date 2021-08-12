@@ -78,7 +78,6 @@
         {
             var model = new ReservationsServicesListingModel
             {
-
                 Services = GetReservationServices(),
                 ReservationId = id
             };
@@ -89,8 +88,6 @@
         [HttpPost]
         public IActionResult ChooseServices(ReservationsServicesListingModel servicesModel)
         {
-
-            var id = TempData["id"];
 
             var reservation = this.data.Reservations.FirstOrDefault(r => r.Id == servicesModel.ReservationId);
 

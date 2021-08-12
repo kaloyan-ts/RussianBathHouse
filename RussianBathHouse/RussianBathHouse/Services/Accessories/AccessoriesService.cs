@@ -1,20 +1,27 @@
 ﻿namespace RussianBathHouse.Services.Accessories
 {
+    using Microsoft.AspNetCore.Identity;
     using RussianBathHouse.Data;
     using RussianBathHouse.Data.Models;
     using RussianBathHouse.Models.Accessories;
+    using RussianBathHouse.Services.Users;
     using System.Linq;
+    using System.Threading.Tasks;
 
     public class AccessoriesService : IAccessoriesService
     {
         private readonly BathHouseDbContext data;
+        private readonly UserManager<ApplicationUser> userManager;
+        private readonly IUsersService users;
 
-        public AccessoriesService(BathHouseDbContext data)
+        public AccessoriesService(BathHouseDbContext data, UserManager<ApplicationUser> userManager, IUsersService users)
         {
             this.data = data;
+            this.userManager = userManager;
+            this.users = users;
         }
 
-        public string Add(string imagePath, string name, decimal price,int quantityLeft, string description)
+        public string Add(string imagePath, string name, decimal price, int quantityLeft, string description)
         {
             var accessory = new Accessory
             {
@@ -22,7 +29,7 @@
                 Name = name,
                 Price = price,
                 QuantityLeft = quantityLeft,
-                Description = description
+                Description = description,
             };
 
             this.data.Accessories.Add(accessory);
@@ -51,7 +58,7 @@
             var totalAccessories = accessoriesQuery.Count();
 
             var accessories = accessoriesQuery
-                 .Skip((currentPage - 1) * accessoriesPerPage)
+                .Skip((currentPage - 1) * accessoriesPerPage)
                 .Take(accessoriesPerPage)
                 .Select(a => new AccessoriesAllViewModel
                 {
@@ -68,20 +75,40 @@
                 CurrentPage = currentPage,
                 SearchTerm = searchTerm,
                 Sorting = sorting,
-                TotalAccessories = totalAccessories
+                TotalAccessories = totalAccessories,
             };
+        }
+
+        public bool EnoughQuantity(string id, int desiredQuantity)
+        {
+            var accessory = FindById(id);
+
+            if (accessory.QuantityLeft < desiredQuantity)
+            {
+                return false;
+            }
+
+            return true;
+        }
+        public void Buy(string id, int desiredQuantity)
+        {
+            var accessory = FindById(id);
+
+            accessory.QuantityLeft -= desiredQuantity;
+
+            this.data.SaveChanges();
         }
 
         public AccessoryDetailsViewModel Details(string id)
         {
-            var accessory = this.data.Accessories.Find(id);
+            var accessory = FindById(id);
 
             var accessoryModel = new AccessoryDetailsViewModel
             {
                 Id = accessory.Id,
+                Name = accessory.Name,
                 Description = accessory.Description,
                 Image = accessory.ImagePath,
-                Name = accessory.Name,
                 Price = accessory.Price,
                 QuantityLeft = accessory.QuantityLeft
             };
@@ -91,7 +118,7 @@
 
         public void Edit(string id, string description, string imagePath, string name, decimal price, int quantity)
         {
-            var accessory = this.data.Accessories.FirstOrDefault(a => a.Id == id);
+            var accessory = FindById(id);
 
             accessory.Description = description;
             accessory.ImagePath = imagePath;
@@ -112,6 +139,22 @@
             var accessory = this.FindById(id);
 
             this.data.Accessories.Remove(accessory);
+            this.data.SaveChanges();
+        }
+
+        public async Task SetAddressAndPhoneNumber(string id, string phoneNumber, string address)
+        {
+            if (await users.GetUserPhoneNumber(id) != null)
+            {
+                return;
+            }
+
+            var user = await userManager.FindByIdAsync(id);
+
+            await this.userManager.SetPhoneNumberAsync(user, phoneNumber);
+
+            user.Address = address;
+
             this.data.SaveChanges();
         }
     }

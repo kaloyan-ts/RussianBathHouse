@@ -10,7 +10,7 @@
     using System.Linq;
     using System.Threading.Tasks;
 
-    using static Areas.Administrator.AdminConstants;
+    using static WebConstants;
     public static class ApplicationBuilderExtensions
     {
         public static IApplicationBuilder PrepareDatabase(this IApplicationBuilder app)
@@ -38,8 +38,6 @@
             var data = services.GetService<BathHouseDbContext>();
 
 
-            
-
             if (data.Cabins.Any())
             {
                 return;
@@ -49,24 +47,9 @@
             {
                 new Cabin
                 {
-                    Capacity  = 3,
-                    PricePerHour = 20,
-                },
-                new Cabin
-                {
-                    Capacity  = 4,
-                    PricePerHour = 25,
-                },
-                new Cabin
-                {
-                    Capacity  = 5,
-                    PricePerHour = 30,
-                },
-                new Cabin
-                {
                     Capacity  = 6,
                     PricePerHour = 40,
-                }
+                },
             });
 
             data.SaveChanges();
@@ -116,12 +99,12 @@
             Task
                 .Run(async () =>
                 {
-                    if (await roleManager.RoleExistsAsync(AdminRole))
+                    if (await roleManager.RoleExistsAsync(AdministratorRoleName))
                     {
                         return;
                     }
 
-                    var role = new IdentityRole { Name = AdminRole };
+                    var role = new IdentityRole { Name = AdministratorRoleName };
 
                     await roleManager.CreateAsync(role);
 
@@ -133,7 +116,7 @@
                         Email = adminEmail,
                         UserName = adminEmail,
                         FirstName = "Admin",
-                        LastName = "Adminov"
+                        LastName = "Admin"
                     };
 
                     await userManager.CreateAsync(user, adminPassword);
