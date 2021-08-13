@@ -2,41 +2,32 @@
 {
     using Microsoft.AspNetCore.Authorization;
     using Microsoft.AspNetCore.Mvc;
-    using RussianBathHouse.Data;
-    using RussianBathHouse.Data.Models;
     using RussianBathHouse.Infrastructure;
     using RussianBathHouse.Models.Reservations;
-    using RussianBathHouse.Models.Services;
     using RussianBathHouse.Services.Reservations;
-    using System;
     using System.Collections.Generic;
-    using System.Data;
-    using System.Linq;
-    using System.Threading.Tasks;
 
     [Authorize]
     public class ReservationsController : Controller
     {
-        private readonly BathHouseDbContext data;
         private readonly IReservationsService reservations;
 
-        public ReservationsController(BathHouseDbContext data, IReservationsService reservations)
+        public ReservationsController(IReservationsService reservations)
         {
-            this.data = data;
             this.reservations = reservations;
         }
 
         public IActionResult Index()
         {
-            var upcomingReservations = new List<ReservationsUpcomingListModel>();
+            List<ReservationsUpcomingListModel> upcomingReservations;
 
             if (this.User.IsAdmin())
             {
-                upcomingReservations = reservations.All();
+                upcomingReservations = reservations.AllUpcoming();
             }
             else
             {
-                upcomingReservations = reservations.Upcoming(this.User.Id());
+                upcomingReservations = reservations.UpcomingForUser(this.User.Id());
             }
 
             return View(upcomingReservations);
@@ -44,17 +35,12 @@
 
         public IActionResult Add()
         {
-            var reservations = this.data.Reservations.Select(r => new ReservedDayAndHoursViewModel
+            var reserved = new ReservationAddFormModel
             {
-                Date = r.ReservedFrom,
-            });
-
-            var model = new ReservationAddFormModel
-            {
-                Reserved = reservations
+                Reserved = reservations.GetReservedDates()
             };
 
-            return View(model);
+            return View(reserved);
         }
         public void SelectDate(string id)
         {
@@ -64,29 +50,24 @@
         [HttpPost]
         public IActionResult Add(ReservationAddFormModel model)
         {
-
             var dateAndTimeId = TempData.Peek("SelectedDateId") as string;
             var reservationTime = reservations.GetDateTimeOfReservation(dateAndTimeId);
 
-            var reservation = new Reservation
+            if (!ModelState.IsValid)
             {
-                NumberOfPeople = model.NumberOfPeople,
-                ReservedFrom = reservationTime,
-                UserId = this.User.Id(),
-                CabinId = 1,
-            };
+                return View(model);
+            }
 
-            this.data.Reservations.Add(reservation);
-            this.data.SaveChanges();
+            var reservationId = reservations.Add(model.NumberOfPeople, reservationTime, this.User.Id());
 
-            return RedirectToAction(actionName: "ChooseServices", controllerName: "Reservations", routeValues: new { id = reservation.Id }, fragment: reservation.Id);
+            return RedirectToAction(actionName: "ChooseServices", controllerName: "Reservations", routeValues: new { id = reservationId }, fragment: reservationId);
         }
 
         public IActionResult ChooseServices(string id)
         {
             var model = new ReservationsServicesListingModel
             {
-                Services = GetReservationServices(),
+                Services = reservations.GetReservationServices(),
                 ReservationId = id
             };
 
@@ -97,56 +78,16 @@
         public IActionResult ChooseServices(ReservationsServicesListingModel servicesModel)
         {
 
-            var reservation = this.data.Reservations.FirstOrDefault(r => r.Id == servicesModel.ReservationId);
+            var reservation = reservations.FindById(servicesModel.ReservationId);
 
             if (reservation == null)
             {
                 return BadRequest();
             }
 
-            var chosenServices = new List<Service>();
-
-            foreach (var service in servicesModel.Services)
-            {
-                if (service == null)
-                {
-                    continue;
-                }
-
-                chosenServices.Add(this.data.Services.First(s => s.Id == service.Id));
-            }
-
-            foreach (var service in chosenServices)
-            {
-                reservation.ReservationServices.Add(new ReservationService
-                {
-                    ServiceId = service.Id
-                });
-            }
-
-            this.data.SaveChanges();
+            reservations.AddServicesToReservation(reservation.Id, servicesModel.Services);
 
             return RedirectToAction("Index");
-        }
-
-        private bool isCabinAvailable(int cabinId, DateTime From, DateTime Until)
-        {
-            var cabin = this.data.Cabins.First(c => c.Id == cabinId);
-
-            return true;
-        }
-
-        private ServiceListViewModel[] GetReservationServices()
-        {
-            var services = this.data
-                .Services
-                .Select(c => new ServiceListViewModel
-                {
-                    Id = c.Id,
-                    Description = c.Description
-                })
-                .ToArray();
-            return services;
         }
     }
 }

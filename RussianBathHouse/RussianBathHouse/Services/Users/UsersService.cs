@@ -55,5 +55,15 @@
 
             return phoneNumber;
         }
+
+        public async Task<string> GetUserFullName(string id)
+        {
+            var user = await userManager.FindByIdAsync(id);
+
+            var FirstName = user.FirstName;
+            var lastName = user.LastName;
+
+            return FirstName + " " + lastName;
+        }
     }
 }

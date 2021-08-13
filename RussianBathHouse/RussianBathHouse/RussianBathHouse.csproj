@@ -62,7 +62,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <None Include="Areas\Administrator\Views\Reservations\Index.cshtml" />
     <None Include="Areas\Administrator\Views\Reservations\Schedule.cshtml" />
     <None Include="Areas\Identity\Pages\Account\Register.cshtml" />
     <None Include="Areas\Identity\Pages\Account\_ViewImports.cshtml" />

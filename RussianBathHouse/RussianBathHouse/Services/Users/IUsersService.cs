@@ -7,5 +7,7 @@
 
         Task<string> GetUserPhoneNumber(string id);
         Task<string> GetUserAddress(string id);
+
+        Task<string> GetUserFullName(string id);
     }
 }

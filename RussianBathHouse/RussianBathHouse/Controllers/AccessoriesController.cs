@@ -36,7 +36,7 @@
 
         public IActionResult Details(string Id)
         {
-            var accessory = this.accessories.Details(Id);
+            var accessory = accessories.Details(Id);
 
             return View(accessory);
         }

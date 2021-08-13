@@ -6,6 +6,7 @@
 
     public class ReservationsUpcomingListModel
     {
+        public string UserFullName { get; set; }
 
         public int NumberOfPeople { get; set; }
 

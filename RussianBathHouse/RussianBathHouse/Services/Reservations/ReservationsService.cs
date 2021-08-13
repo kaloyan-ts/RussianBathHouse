@@ -1,8 +1,10 @@
 ﻿namespace RussianBathHouse.Services.Reservations
 {
     using RussianBathHouse.Data;
+    using RussianBathHouse.Data.Models;
     using RussianBathHouse.Models.Reservations;
     using RussianBathHouse.Models.Services;
+    using RussianBathHouse.Services.Users;
     using System;
     using System.Collections.Generic;
     using System.Linq;
@@ -10,19 +12,22 @@
     public class ReservationsService : IReservationsService
     {
         private readonly BathHouseDbContext data;
+        private readonly IUsersService users;
 
-        public ReservationsService(BathHouseDbContext data)
+        public ReservationsService(BathHouseDbContext data, IUsersService users)
         {
             this.data = data;
+            this.users = users;
         }
 
-        public List<ReservationsUpcomingListModel> All()
+        public List<ReservationsUpcomingListModel> AllUpcoming()
         {
             var reservations = this.data.Reservations
                 .Where(r => r.ReservedFrom.CompareTo(DateTime.Now) > 0)
                 .Select(a => new ReservationsUpcomingListModel
                 {
                     ReservedFrom = a.ReservedFrom,
+                    UserFullName = users.GetUserFullName(a.UserId).Result,
                     CabinNumber = a.CabinId,
                     NumberOfPeople = a.NumberOfPeople,
                     ReservationServices = a.ReservationServices
@@ -38,13 +43,14 @@
             return reservations;
         }
 
-        public List<ReservationsUpcomingListModel> Upcoming(string id)
+        public List<ReservationsUpcomingListModel> UpcomingForUser(string id)
         {
             var reservations = this.data.Reservations
                 .Where(r => id == r.UserId)
                 .Select(a => new ReservationsUpcomingListModel
                 {
                     ReservedFrom = a.ReservedFrom,
+                    UserFullName = users.GetUserFullName(a.UserId).Result,
                     CabinNumber = a.CabinId,
                     NumberOfPeople = a.NumberOfPeople,
                     ReservationServices = a.ReservationServices
@@ -150,6 +156,82 @@
                 6 => 20,
                 _ => 7,
             };
+        }
+
+        public List<ReservedDayAndHoursViewModel> GetReservedDates()
+        {
+            var reserved = this.data.Reservations.Select(r => new ReservedDayAndHoursViewModel
+            {
+                Date = r.ReservedFrom
+            })
+                .ToList();
+
+            return reserved;
+        }
+
+        public string Add(int numberOfPeople,
+            DateTime reservationTime,
+            string userId)
+        {
+            var reservation = new Reservation
+            {
+                NumberOfPeople = numberOfPeople,
+                ReservedFrom = reservationTime,
+                UserId = userId,
+                CabinId = 4,
+            };
+
+            this.data.Reservations.Add(reservation);
+            this.data.SaveChanges();
+
+            return reservation.Id;
+        }
+
+        public ServiceListViewModel[] GetReservationServices()
+        {
+            var services = this.data
+                .Services
+                .Select(c => new ServiceListViewModel
+                {
+                    Id = c.Id,
+                    Description = c.Description
+                })
+                .ToArray();
+            return services;
+        }
+
+        public Reservation FindById(string id)
+        {
+            var reservation = this.data.Reservations.FirstOrDefault(r => r.Id == id);
+
+            return reservation;
+        }
+
+        public void AddServicesToReservation(string id, ServiceListViewModel[] services)
+        {
+            var reservation = FindById(id);
+
+            var chosenServices = new List<Service>();
+
+            foreach (var service in services)
+            {
+                if (service == null)
+                {
+                    continue;
+                }
+
+                reservation.ReservationServices.Add(new ReservationService
+                {
+                    ServiceId = service.Id
+                });
+            }
+
+            this.data.SaveChanges();
+        }
+
+        public Service FindServiceById(string serviceId)
+        {
+            return this.data.Services.First(s => s.Id == serviceId);
         }
     }
 }

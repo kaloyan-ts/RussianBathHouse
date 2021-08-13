@@ -18,22 +18,9 @@
             this.data = data;
         }
 
-        public IActionResult Index()
-        {
-
-            var allReservations = reservations.All();
-
-            return View(allReservations);
-        }
-
         public IActionResult Schedule()
         {
-
-            var allReservations = data.Reservations.Select(r => new ReservedDayAndHoursViewModel
-            {
-                Date = r.ReservedFrom
-            })
-                .ToList(); ;
+            var allReservations = reservations.GetReservedDates();
 
             return View(allReservations);
         }
