@@ -1,8 +1,6 @@
 ﻿@model ReservationsServicesListingModel
 
-@{
-    Model.ReservationId = Model.ReservationId;
-}
+
 
 <form method="POST" class="" asp-action="ChooseServices">
     <div class="form-group">
@@ -16,11 +14,6 @@
             }
         </div>
         <input type="hidden" asp-for="ReservationId" name="ReservationId" value="@Model.ReservationId">
-        <div class="form-group mt-3">
-            <label asp-for="@Model.NumberOfPeople"></label>
-            <input asp-for="@Model.NumberOfPeople" type="number" class="form-control" placeholder="Enter number of people">
-            <span asp-validation-for="@Model.NumberOfPeople" class="small text-danger"></span>
-        </div>
         <button type="submit" class="btn btn-primary mt-4 text-center"
                 asp-controller="Reservations" asp-action="ChooseServices">
             Save

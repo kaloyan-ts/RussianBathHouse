@@ -78,6 +78,10 @@
             "Microsoft.VisualStudio.Web.CodeGeneration.Design": {
               "target": "Package",
               "version": "[5.0.2, )"
+            },
+            "axios": {
+              "target": "Package",
+              "version": "[0.16.2, )"
             }
           },
           "imports": [

@@ -18,13 +18,14 @@
             this.data = data;
         }
 
-        public IActionResult All()
+        public IActionResult Index()
         {
 
             var allReservations = reservations.All();
 
             return View(allReservations);
         }
+
         public IActionResult Schedule()
         {
 

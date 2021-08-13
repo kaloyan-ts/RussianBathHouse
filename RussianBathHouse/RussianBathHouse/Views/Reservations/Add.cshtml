@@ -1,4 +1,5 @@
 ﻿@model ReservationAddFormModel
+@inject Microsoft.AspNetCore.Antiforgery.IAntiforgery Xsrf
 
 @{
     ViewData["Title"] = "Make Reservation";
@@ -48,7 +49,7 @@
 }
 <form method="POST" class="text-center" asp-action="Add" asp-controller="Reservations">
     <table class="table table-bordered">
-        <caption>Click on the desired free day and hour timespan</caption>
+        <caption id="here">Click on the desired free day and hour timespan</caption>
         <thead>
             <tr>
                 <th scope="col">Day</th>
@@ -75,7 +76,7 @@
                     }
                     else
                     {
-                        <td class="active" id="0 + @(i)">Free</td>
+                        <td class="active" id="0 + @(i) ">Free</td>
                     }
                 }
             </tr>
@@ -93,7 +94,7 @@
                     }
                     else
                     {
-                        <td class="active" id="0 + @(i)">Free</td>
+                        <td class="active" id="1 + @(i)">Free</td>
                     }
                 }
             <tr>
@@ -111,7 +112,7 @@
                     }
                     else
                     {
-                        <td class="active" id="0 + @(i)">Free</td>
+                        <td class="active" id="2 + @(i)">Free</td>
                     }
                 }
             </tr>
@@ -130,7 +131,7 @@
                     }
                     else
                     {
-                        <td class="active" id="0 + @(i)">Free</td>
+                        <td class="active" id="3 + @(i)">Free</td>
                     }
                 }
             </tr>
@@ -149,7 +150,7 @@
                     }
                     else
                     {
-                        <td class="active" id="0 + @(i)">Free</td>
+                        <td class="active" id="4 + @(i)">Free</td>
                     }
                 }
             </tr>
@@ -168,7 +169,7 @@
                     }
                     else
                     {
-                        <td class="active" id="0 + @(i)">Free</td>
+                        <td class="active" id="5 + @(i)">Free</td>
                     }
                 }
             </tr>
@@ -186,46 +187,56 @@
                     }
                     else
                     {
-                        <td class="active" id="0 + @(i)">Free</td>
+                        <td class="active" id="6 + @(i)">Free</td>
                     }
                 }
                 }
             </tr>
         </tbody>
     </table>
-    <button type="submit" class="btn btn-primary mt-4 text-center"
-            asp-controller="Reservations" asp-action="Add">
+
+    <div class="form-group mt-3">
+        <label asp-for="@Model.NumberOfPeople"></label>
+        <input asp-for="@Model.NumberOfPeople" type="number" class="form-control" placeholder="Enter number of people">
+        <span asp-validation-for="@Model.NumberOfPeople" class="small text-danger"></span>
+    </div>
+
+    <button asp-controller="Reservations" asp-action="Add" class="btn btn-primary mt-4 text-center">
         Save
     </button>
 </form>
 
 
-@{
+@functions{
+    public string GetAntiXsrfRequestToken()
+    {
+        return Xsrf.GetAndStoreTokens(Context).RequestToken;
+    }
 
 }
+
 @section Scripts {
 
     <script>
+
+        function returnId(data) {
+            return $.ajax(
+                {
+                    type: 'POST',
+                    dataType: 'JSON',
+                    url: '/Reservations/SelectDate',
+                    data: { id: data },
+                })
+        };
+
+        var dateAndTime = null
         $(".active").on("click", ev => {
             ev.preventDefault();
             ev.target.style = "background-color: #91ff80";
             ev.target.innerText = 'You reserved it!';
-            const data = { DateAndTime: ev.target.id };
 
-            fetch('/Reservations/Add', {
-                method: 'POST', 
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify(data),
-            })
-                .then(response => response.json())
-                .then(data => {
-                    console.log('Success:', data);
-                })
-                .catch((error) => {
-                    console.error('Error:', error);
-                });
+            dateAndTime = ev.target.id;
+            returnId(dateAndTime);
         });
 
     </script>

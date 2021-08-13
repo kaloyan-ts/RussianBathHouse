@@ -44,7 +44,7 @@ namespace RussianBathHouse
             services
                 .AddControllersWithViews(options =>
                 {
-                    options.Filters.Add<AutoValidateAntiforgeryTokenAttribute>();
+                   
                 });
 
             services.AddTransient<IAccessoriesService, AccessoriesService>();

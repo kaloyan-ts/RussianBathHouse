@@ -2,6 +2,9 @@
   "version": 3,
   "targets": {
     "net5.0": {
+      "axios/0.16.2": {
+        "type": "package"
+      },
       "Humanizer.Core/2.8.26": {
         "type": "package",
         "compile": {
@@ -2189,6 +2192,19 @@
     }
   },
   "libraries": {
+    "axios/0.16.2": {
+      "sha512": "Xp86hC7/Z4CDwlbM0udtI/Q/AKxsQG7EiZItwtqj3KeZKC1xKxNDImtNPB5e7i6PK2EdOfGns5BtVR6u1V/NEQ==",
+      "type": "package",
+      "path": "axios/0.16.2",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "Content/Scripts/axios.js",
+        "Content/Scripts/axios.min.js",
+        "axios.0.16.2.nupkg.sha512",
+        "axios.nuspec"
+      ]
+    },
     "Humanizer.Core/2.8.26": {
       "sha512": "OiKusGL20vby4uDEswj2IgkdchC1yQ6rwbIkZDVBPIR6al2b7n3pC91elBul9q33KaBgRKhbZH3+2Ur4fnWx2A==",
       "type": "package",
@@ -7551,7 +7567,8 @@
       "Microsoft.EntityFrameworkCore.Design >= 5.0.8",
       "Microsoft.EntityFrameworkCore.SqlServer >= 5.0.8",
       "Microsoft.EntityFrameworkCore.Tools >= 5.0.8",
-      "Microsoft.VisualStudio.Web.CodeGeneration.Design >= 5.0.2"
+      "Microsoft.VisualStudio.Web.CodeGeneration.Design >= 5.0.2",
+      "axios >= 0.16.2"
     ]
   },
   "packageFolders": {
@@ -7632,6 +7649,10 @@
           "Microsoft.VisualStudio.Web.CodeGeneration.Design": {
             "target": "Package",
             "version": "[5.0.2, )"
+          },
+          "axios": {
+            "target": "Package",
+            "version": "[0.16.2, )"
           }
         },
         "imports": [

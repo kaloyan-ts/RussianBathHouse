@@ -12,6 +12,7 @@
     using System.Collections.Generic;
     using System.Data;
     using System.Linq;
+    using System.Threading.Tasks;
 
     [Authorize]
     public class ReservationsController : Controller
@@ -55,24 +56,33 @@
 
             return View(model);
         }
+        public void SelectDate(string id)
+        {
+            TempData["SelectedDateId"] = id;
+        }
 
         [HttpPost]
-        public IActionResult Add(DateAndTimeId model)
+        public IActionResult Add(ReservationAddFormModel model)
         {
-            var id = model.DateAndTime;
+
+            var dateAndTimeId = TempData.Peek("SelectedDateId") as string;
+            var reservationTime = reservations.GetDateTimeOfReservation(dateAndTimeId);
 
             var reservation = new Reservation
             {
+                NumberOfPeople = model.NumberOfPeople,
+                ReservedFrom = reservationTime,
                 UserId = this.User.Id(),
+                CabinId = 1,
             };
 
             this.data.Reservations.Add(reservation);
             this.data.SaveChanges();
 
-            return RedirectToAction("ChooseServices", new { id = reservation.Id });
+            return RedirectToAction(actionName: "ChooseServices", controllerName: "Reservations", routeValues: new { id = reservation.Id }, fragment: reservation.Id);
         }
 
-        public IActionResult ChooseServices([FromRoute] string id)
+        public IActionResult ChooseServices(string id)
         {
             var model = new ReservationsServicesListingModel
             {
@@ -105,8 +115,6 @@
 
                 chosenServices.Add(this.data.Services.First(s => s.Id == service.Id));
             }
-
-            reservation.NumberOfPeople = servicesModel.NumberOfPeople;
 
             foreach (var service in chosenServices)
             {

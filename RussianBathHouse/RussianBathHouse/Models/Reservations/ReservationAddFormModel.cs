@@ -11,8 +11,6 @@
         [Range(ReservationMinPeople, ReservationMaxPeople)]
         public int NumberOfPeople { get; set; }
 
-        public string DateAndTimeId { get; set; }
-
         public IEnumerable<ReservedDayAndHoursViewModel> Reserved { get; set; } = new List<ReservedDayAndHoursViewModel>();
 
     }

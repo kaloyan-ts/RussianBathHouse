@@ -11,6 +11,10 @@
 
         public int CabinNumber { get; set; }
 
+        public decimal ServicesPrice { get; set; }
+
+        public decimal CabinPrice { get; set; }
+
         public DateTime ReservedFrom { get; set; }
 
         public IEnumerable<ServiceListViewModel> ReservationServices { get; set; }
