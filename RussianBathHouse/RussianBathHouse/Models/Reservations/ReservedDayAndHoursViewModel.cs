@@ -4,6 +4,5 @@
     public class ReservedDayAndHoursViewModel
     {
         public DateTime Date { get; set; }
-
     }
 }

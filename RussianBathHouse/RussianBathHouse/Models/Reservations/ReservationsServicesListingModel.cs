@@ -1,8 +1,6 @@
-﻿
-using RussianBathHouse.Models.Services;
-
-namespace RussianBathHouse.Models.Reservations
+﻿namespace RussianBathHouse.Models.Reservations
 {
+    using RussianBathHouse.Models.Services;
     public class ReservationsServicesListingModel
     {
         public string ReservationId { get; set; }

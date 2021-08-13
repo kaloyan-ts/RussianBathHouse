@@ -46,6 +46,11 @@
         {
             var accessory = accessories.FindById(Id);
 
+            if (accessory == null)
+            {
+                return BadRequest();
+            }
+
             var accessoryModel = new BuyFormModel
             {
                 AccessoryId = accessory.Id,

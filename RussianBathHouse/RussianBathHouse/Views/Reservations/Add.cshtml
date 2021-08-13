@@ -226,6 +226,9 @@
                     dataType: 'JSON',
                     url: '/Reservations/SelectDate',
                     data: { id: data },
+                    headers: {
+                        "RequestVerificationToken": "@GetAntiXsrfRequestToken()",
+                    }
                 })
         };
 

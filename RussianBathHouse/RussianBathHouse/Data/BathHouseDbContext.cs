@@ -4,7 +4,6 @@
     using Microsoft.EntityFrameworkCore;
     using RussianBathHouse.Data.Models;
 
-
     public class BathHouseDbContext : IdentityDbContext<ApplicationUser>
     {
         public BathHouseDbContext(DbContextOptions<BathHouseDbContext> options)

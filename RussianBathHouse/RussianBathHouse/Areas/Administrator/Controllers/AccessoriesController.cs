@@ -4,7 +4,6 @@
     using RussianBathHouse.Models.Accessories;
     using RussianBathHouse.Services.Accessories;
 
-
     public class AccessoriesController : AdministratorController
     {
         private readonly IAccessoriesService accessories;
@@ -38,7 +37,7 @@
 
         public IActionResult Edit(string Id)
         {
-            var accessory = this.accessories.FindById(Id);
+            var accessory = accessories.FindById(Id);
 
             if (accessory == null)
             {
@@ -61,7 +60,7 @@
         [HttpPost]
         public IActionResult Edit(AccessoryEditFormModel changedAccessory)
         {
-            this.accessories.Edit(changedAccessory.Id,
+            accessories.Edit(changedAccessory.Id,
                 changedAccessory.Description,
                 changedAccessory.ImagePath,
                 changedAccessory.Name,
@@ -72,7 +71,7 @@
         }
         public IActionResult Delete(string Id)
         {
-            this.accessories.Remove(Id);
+            accessories.Remove(Id);
 
             return RedirectToAction(actionName: "All", controllerName: "Accessories");
         }

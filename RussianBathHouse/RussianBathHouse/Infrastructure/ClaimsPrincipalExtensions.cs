@@ -1,6 +1,7 @@
 ﻿namespace RussianBathHouse.Infrastructure
 {
     using System.Security.Claims;
+
     using static WebConstants;
     public static class ClaimsPrincipalExtensions
     {
