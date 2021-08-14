@@ -1,0 +1,42 @@
+﻿@model List<AllPurchasesViewModel>
+
+
+@if (this.User.IsAdmin())
+{
+    <h1>All Purchases</h1>
+}
+else
+{
+    <h1>My Purchases</h1>
+}
+
+@{
+    var count = 1;
+}
+
+<table class="table table-striped">
+    <thead class="thead-dark">
+        <tr>
+            <th scope="col">№</th>
+            <th scope="col">Purchased by</th>
+            <th scope="col">Date</th>
+            <th scope="col">Accessory</th>
+            <th scope="col">Quantity</th>
+            <th scope="col">Total Price</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var purchase in Model)
+        {
+            <tr>
+                <td scope="col">@count</td>
+                <td scope="col">@purchase.UserFullName</td>
+                <td scope="col">@purchase.DateOfPurchase</td>
+                <td scope="col">@purchase.AccessoryName</td>
+                <td scope="col">@purchase.Quantity</td>
+                <td scope="col">@purchase.TotalPrice</td>
+            </tr>
+            count++;
+        }
+    </tbody>
+</table>

@@ -12,6 +12,7 @@ namespace RussianBathHouse
     using RussianBathHouse.Data.Models;
     using RussianBathHouse.Infrastructure;
     using RussianBathHouse.Services.Accessories;
+    using RussianBathHouse.Services.Purchases;
     using RussianBathHouse.Services.Reservations;
     using RussianBathHouse.Services.Users;
 
@@ -50,6 +51,8 @@ namespace RussianBathHouse
             services.AddTransient<IAccessoriesService, AccessoriesService>();
             services.AddTransient<IReservationsService, ReservationsService>();
             services.AddTransient<IUsersService, UsersService>();
+            services.AddTransient<IPurchasesService, PurchasesService>();
+
 
         }
 

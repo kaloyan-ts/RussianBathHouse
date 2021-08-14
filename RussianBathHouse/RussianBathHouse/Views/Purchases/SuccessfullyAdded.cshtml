@@ -1,0 +1,15 @@
+﻿@model SuccessfullyAddedPurchaseViewModel
+
+@{ 
+    ViewData["Title"] = "Thank you for your Purchase ";
+}
+
+<div>
+    <h3 class="font-weight-bold" >Thank you for shopping in our site!</h3>
+
+    <div class="font-weight-normal mb-3 text-uppercase" >
+        You purchased @Model.Quantity @Model.AccessoryName@(Model.Quantity == 1 ? string.Empty : "s"). Your total price will be: @Model.TotalPrice $
+    </div>
+
+    <a type="button" asp-controller="Home" asp-action="Index" class="btn btn-primary">Home Page</a>
+</div>

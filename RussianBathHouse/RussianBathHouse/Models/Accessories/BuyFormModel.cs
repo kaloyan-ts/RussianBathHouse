@@ -7,7 +7,6 @@
     {
         public string AccessoryId { get; set; }
 
-        public decimal AccessoryPrice { get; set; }
         [Required]
         [Range(1,100)]
         public int Quantity { get; set; }

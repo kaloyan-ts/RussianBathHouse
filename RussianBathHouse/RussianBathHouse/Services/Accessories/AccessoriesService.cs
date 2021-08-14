@@ -135,6 +135,13 @@
             this.data.SaveChanges();
         }
 
+        public decimal GetTotalPrice(string accessoryId, int Quantity)
+        {
+            var accessory = FindById(accessoryId);
 
+            var totalPrice = accessory.Price * Quantity;
+
+            return totalPrice;
+        }
     }
 }

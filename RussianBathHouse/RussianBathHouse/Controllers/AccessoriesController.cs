@@ -5,18 +5,22 @@
     using RussianBathHouse.Infrastructure;
     using RussianBathHouse.Models.Accessories;
     using RussianBathHouse.Services.Accessories;
+    using RussianBathHouse.Services.Purchases;
     using RussianBathHouse.Services.Users;
+    using System;
     using System.Threading.Tasks;
 
     public class AccessoriesController : Controller
     {
         private readonly IAccessoriesService accessories;
         private readonly IUsersService users;
+        private readonly IPurchasesService purchases;
 
-        public AccessoriesController(IAccessoriesService accessories, IUsersService users)
+        public AccessoriesController(IAccessoriesService accessories, IUsersService users, IPurchasesService purchases)
         {
             this.accessories = accessories;
             this.users = users;
+            this.purchases = purchases;
         }
 
         public IActionResult Index()
@@ -54,7 +58,6 @@
             var accessoryModel = new BuyFormModel
             {
                 AccessoryId = accessory.Id,
-                AccessoryPrice = accessory.Price,
             };
 
             return View(accessoryModel);
@@ -77,11 +80,15 @@
 
             accessories.Buy(model.AccessoryId, model.Quantity);
 
+            var dateOfPurchase = DateTime.Now;
+
             string userId = this.User.Id();
+
+            var purchaseId = purchases.Add(userId, model.AccessoryId, model.Quantity, dateOfPurchase);
 
             await users.SetAddressAndPhoneNumber(userId, model.PhoneNumber, model.Address);
 
-            return RedirectToAction("All");
+            return RedirectToAction(controllerName: "Purchases", actionName: "SuccessfullyAdded", routeValues: new { purchaseId });
         }
     }
 }

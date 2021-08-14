@@ -30,5 +30,7 @@
         void Buy(string id, int desiredQuantity);
 
         public bool EnoughQuantity(string id, int desiredQuantity);
+
+        public decimal GetTotalPrice(string accessoryId, int Quantity);
     }
 }
