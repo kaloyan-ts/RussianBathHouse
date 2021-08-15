@@ -18,7 +18,7 @@
 
         [Required]
         [MaxLength(AddressMaxLength)]
-        [MinLength(AddressMinLength)]
+        [MinLength(AddressMinLength, ErrorMessage = "The address should be between 10 and 40 symbols")]
         public string Address { get; set; }
 
     }

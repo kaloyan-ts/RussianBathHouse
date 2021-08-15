@@ -14,9 +14,9 @@
             @if (phoneNumber == null)
             {
                 <div class="form-group">
-                    <label>Please write your Phone Number here:</label>
-                    <input asp-for="@Model.PhoneNumber" class="form-control" placeholder="Your Phone Number">
-                    <span asp-validation-for="@Model.PhoneNumber" class="small text-danger"></span>
+                    <label asp-for="@Model.PhoneNumber">Phone Number</label>
+                    <input asp-for="@Model.PhoneNumber" type="tel" pattern="[+][3][5][9][0-9]{2}[0-9]{3}[0-9]{4}" class="form-control" placeholder="Enter your new phone number">
+                    <small class="form-text text-muted">Your phone number should start with <span class="badge badge-info">+359</span></small>
                 </div>
                 <div class="form-group">
                     <label>Please write your Address here:</label>
@@ -44,6 +44,12 @@
         </form>
     </div>
 </div>
+
+@{
+    var path = Path.Replace(".cshtml", string.Empty);
+    path = path.Replace("/Views", string.Empty);
+    TempData["PreviousUrl"] = path + "?id=" + Model.AccessoryId;
+}
 
 @section Scripts {
     <partial name="_ValidationScriptsPartial" />

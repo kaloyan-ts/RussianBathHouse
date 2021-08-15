@@ -18,16 +18,13 @@
 
         public async Task SetAddressAndPhoneNumber(string id, string phoneNumber, string address)
         {
-            if (await this.GetUserPhoneNumber(id) != null)
+            if (await this.GetUserPhoneNumber(id) != null && await this.GetUserAddress(id) != null)
             {
                 return;
             }
 
-            var user = await userManager.FindByIdAsync(id);
-
-            await this.userManager.SetPhoneNumberAsync(user, phoneNumber);
-
-            user.Address = address;
+            await ChangePhoneNumber(id, phoneNumber);
+            await ChangeAddress(id, address);
 
             this.data.SaveChanges();
         }
@@ -36,8 +33,9 @@
         {
             var user = await userManager.FindByIdAsync(id);
 
-            user.PhoneNumber = phoneNumber;
+            await userManager.SetPhoneNumberAsync(user, phoneNumber);
 
+            this.data.SaveChanges();
         }
 
         public async Task ChangeAddress(string id, string address)
@@ -46,6 +44,7 @@
 
             user.Address = address;
 
+            this.data.SaveChanges();
         }
 
         public async Task<string> GetUserAddress(string id)

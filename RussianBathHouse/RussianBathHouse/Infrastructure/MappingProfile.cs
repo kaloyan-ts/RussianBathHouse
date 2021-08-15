@@ -3,23 +3,11 @@
     using AutoMapper;
     using RussianBathHouse.Data.Models;
     using RussianBathHouse.Models.Accessories;
-    using RussianBathHouse.Models.Purchases;
     using RussianBathHouse.Models.Reservations;
-    using RussianBathHouse.Models.Services;
-    using RussianBathHouse.Services.Accessories;
-    using RussianBathHouse.Services.Users;
-    using System.Linq;
 
     public class MappingProfile : Profile
     {
-        private readonly IUsersService users;
-        private readonly IAccessoriesService accessories;
 
-        public MappingProfile(IUsersService users, IAccessoriesService accessories)
-        {
-            this.users = users;
-            this.accessories = accessories;
-        }
 
         public MappingProfile()
         {
