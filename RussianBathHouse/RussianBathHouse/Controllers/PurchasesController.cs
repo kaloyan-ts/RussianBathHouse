@@ -1,5 +1,6 @@
 ﻿namespace RussianBathHouse.Controllers
 {
+    using AutoMapper;
     using Microsoft.AspNetCore.Authorization;
     using Microsoft.AspNetCore.Mvc;
     using RussianBathHouse.Infrastructure;

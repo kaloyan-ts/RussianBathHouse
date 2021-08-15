@@ -1,5 +1,7 @@
 ﻿namespace RussianBathHouse.Services.Reservations
 {
+    using AutoMapper;
+    using AutoMapper.QueryableExtensions;
     using RussianBathHouse.Data;
     using RussianBathHouse.Data.Models;
     using RussianBathHouse.Models.Reservations;
@@ -12,18 +14,20 @@
     public class ReservationsService : IReservationsService
     {
         private readonly BathHouseDbContext data;
+        private readonly IMapper mapper;
         private readonly IUsersService users;
 
-        public ReservationsService(BathHouseDbContext data, IUsersService users)
+        public ReservationsService(BathHouseDbContext data, IMapper mapper, IUsersService users)
         {
             this.data = data;
+            this.mapper = mapper;
             this.users = users;
         }
 
         public List<ReservationsUpcomingListModel> AllUpcoming()
         {
             var reservations = this.data.Reservations
-                .Where(r => r.ReservedFrom.CompareTo(DateTime.Now) > 0)
+                .Where(r => r.ReservedFrom.CompareTo(DateTime.Today) > 0)
                 .Select(a => new ReservationsUpcomingListModel
                 {
                     ReservedFrom = a.ReservedFrom,
@@ -31,37 +35,41 @@
                     CabinNumber = a.CabinId,
                     NumberOfPeople = a.NumberOfPeople,
                     ReservationServices = a.ReservationServices
-                    .Select(rs => new ServiceListViewModel
-                    {
-                        Description = rs.Service.Description
-                    }),
+                   .Select(rs => new ServiceListViewModel
+                   {
+                       Description = rs.Service.Description
+                   }),
                     ServicesPrice = a.ReservationServices.Sum(rs => rs.Service.Price),
                     CabinPrice = a.Cabin.PricePerHour * 2
                 })
                 .ToList();
+
 
             return reservations;
         }
 
+
+
         public List<ReservationsUpcomingListModel> UpcomingForUser(string id)
         {
             var reservations = this.data.Reservations
-                .Where(r => id == r.UserId)
-                .Select(a => new ReservationsUpcomingListModel
-                {
-                    ReservedFrom = a.ReservedFrom,
-                    UserFullName = users.GetUserFullName(a.UserId).Result,
-                    CabinNumber = a.CabinId,
-                    NumberOfPeople = a.NumberOfPeople,
-                    ReservationServices = a.ReservationServices
-                    .Select(rs => new ServiceListViewModel
-                    {
-                        Description = rs.Service.Description,
-                    }),
-                    ServicesPrice = a.ReservationServices.Sum(rs => rs.Service.Price),
-                    CabinPrice = a.Cabin.PricePerHour * 2
-                })
-                .ToList();
+               .Where(r => r.ReservedFrom.CompareTo(DateTime.Today) > 0)
+               .Where(r => r.UserId == id)
+               .Select(a => new ReservationsUpcomingListModel
+               {
+                   ReservedFrom = a.ReservedFrom,
+                   UserFullName = users.GetUserFullName(a.UserId).Result,
+                   CabinNumber = a.CabinId,
+                   NumberOfPeople = a.NumberOfPeople,
+                   ReservationServices = a.ReservationServices
+                   .Select(rs => new ServiceListViewModel
+                   {
+                       Description = rs.Service.Description
+                   }),
+                   ServicesPrice = a.ReservationServices.Sum(rs => rs.Service.Price),
+                   CabinPrice = a.Cabin.PricePerHour * 2
+               })
+               .ToList();
 
             return reservations;
         }
@@ -130,7 +138,7 @@
                 }
 
             }
-            for (int h = 8; h < 20; h += 2)
+            for (int h = 8; h <= 20; h += 2)
             {
                 if (timespan == h)
                 {
@@ -160,10 +168,8 @@
 
         public List<ReservedDayAndHoursViewModel> GetReservedDates()
         {
-            var reserved = this.data.Reservations.Select(r => new ReservedDayAndHoursViewModel
-            {
-                Date = r.ReservedFrom
-            })
+            var reserved = this.data.Reservations
+                .ProjectTo<ReservedDayAndHoursViewModel>(this.mapper.ConfigurationProvider)
                 .ToList();
 
             return reserved;
@@ -191,12 +197,13 @@
         {
             var services = this.data
                 .Services
-                .Select(c => new ServiceListViewModel
+                .Select(s => new ServiceListViewModel
                 {
-                    Id = c.Id,
-                    Description = c.Description
+                    Description = s.Description,
+                    Id = s.Id
                 })
                 .ToArray();
+
             return services;
         }
 

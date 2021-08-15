@@ -56,8 +56,8 @@
                        AccessoryName = accessories.FindById(p.AccessoryId).Name,
                        UserFullName = users.GetUserFullName(p.UserId).Result,
                        DateOfPurchase = p.DateOfPurchase,
-                       Quantity = p.Quantity,
-                       TotalPrice = p.TotalPrice,
+                       Quantity =p.Quantity,
+                       TotalPrice = p.TotalPrice
                    })
                    .OrderByDescending(p => p.DateOfPurchase)
                    .ToList();
@@ -68,14 +68,14 @@
         public List<AllPurchasesViewModel> AllForUser(string userId)
         {
             var purchases = this.data.Purchases
-                .Where(p => p.UserId == userId)
-                .Select(p => new AllPurchasesViewModel
+                .Where(p => p.UserId == userId).
+                Select(p => new AllPurchasesViewModel
                 {
                     AccessoryName = accessories.FindById(p.AccessoryId).Name,
                     UserFullName = users.GetUserFullName(p.UserId).Result,
                     DateOfPurchase = p.DateOfPurchase,
                     Quantity = p.Quantity,
-                    TotalPrice = p.TotalPrice,
+                    TotalPrice = p.TotalPrice
                 })
                 .OrderByDescending(p => p.DateOfPurchase)
                 .ToList();

@@ -451,3 +451,7 @@ D:\Kaloyan\asp.net project identity\RussianBathHouse\RussianBathHouse\obj\Debug\
 D:\Kaloyan\asp.net project identity\RussianBathHouse\RussianBathHouse\obj\Debug\net5.0\Razor\Areas\Administrator\Views\Accessories\Edit.cshtml.g.cs
 D:\Kaloyan\asp.net project identity\RussianBathHouse\RussianBathHouse\obj\Debug\net5.0\Razor\Views\Purchases\All.cshtml.g.cs
 D:\Kaloyan\asp.net project identity\RussianBathHouse\RussianBathHouse\obj\Debug\net5.0\Razor\Views\Purchases\SuccessfullyAdded.cshtml.g.cs
+D:\Kaloyan\asp.net project identity\RussianBathHouse\RussianBathHouse\bin\Debug\net5.0\AutoMapper.dll
+D:\Kaloyan\asp.net project identity\RussianBathHouse\RussianBathHouse\bin\Debug\net5.0\AutoMapper.Extensions.Microsoft.DependencyInjection.dll
+D:\Kaloyan\asp.net project identity\RussianBathHouse\RussianBathHouse\obj\Debug\net5.0\Razor\Views\Additional\ChangeAddress.cshtml.g.cs
+D:\Kaloyan\asp.net project identity\RussianBathHouse\RussianBathHouse\obj\Debug\net5.0\Razor\Views\Additional\ChangePhoneNumber.cshtml.g.cs

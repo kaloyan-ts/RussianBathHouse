@@ -24,6 +24,10 @@
                     <span asp-validation-for="@Model.Address" class="small text-danger"></span>
                 </div>
             }
+            else
+            {
+                <div>We already have your delivery data, but <a type="button" asp-controller="Users" asp-action="ChangePhoneNumber" class="btn btn-primary">Here</a> you can change your phone number and <a type="button" asp-controller="Users" asp-action="ChangeAddress" class="btn btn-primary">HERE</a> you can change your address.</div>
+            }
             @{
                 Model.PhoneNumber = phoneNumber;
                 Model.Address = await users.GetUserAddress(this.User.Id());

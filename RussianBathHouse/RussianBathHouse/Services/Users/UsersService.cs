@@ -32,6 +32,22 @@
             this.data.SaveChanges();
         }
 
+        public async Task ChangePhoneNumber(string id, string phoneNumber)
+        {
+            var user = await userManager.FindByIdAsync(id);
+
+            user.PhoneNumber = phoneNumber;
+
+        }
+
+        public async Task ChangeAddress(string id, string address)
+        {
+            var user = await userManager.FindByIdAsync(id);
+
+            user.Address = address;
+
+        }
+
         public async Task<string> GetUserAddress(string id)
         {
             var user = await userManager.FindByIdAsync(id);

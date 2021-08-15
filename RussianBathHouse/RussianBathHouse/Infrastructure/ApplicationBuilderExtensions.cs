@@ -74,7 +74,7 @@
                new Service
                {
                   Description ="Luxury organic body scrub",
-                    Price = 20,
+                    Price = 40,
                },
                new Service
                {
@@ -84,7 +84,7 @@
                new Service
                {
                    Description ="Body Scrub",
-                    Price = 40,
+                    Price = 20,
                }
            });
 

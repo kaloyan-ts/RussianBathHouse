@@ -42,6 +42,8 @@ namespace RussianBathHouse
                 .AddRoles<IdentityRole>()
                 .AddEntityFrameworkStores<BathHouseDbContext>();
 
+            services.AddAutoMapper(typeof(Startup));
+
             services
                 .AddControllersWithViews(options =>
                 {

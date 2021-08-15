@@ -1,5 +1,7 @@
 ﻿namespace RussianBathHouse.Services.Accessories
 {
+    using AutoMapper;
+    using AutoMapper.QueryableExtensions;
     using RussianBathHouse.Data;
     using RussianBathHouse.Data.Models;
     using RussianBathHouse.Models.Accessories;
@@ -8,10 +10,12 @@
     public class AccessoriesService : IAccessoriesService
     {
         private readonly BathHouseDbContext data;
+        private readonly IMapper mapper;
 
-        public AccessoriesService(BathHouseDbContext data)
+        public AccessoriesService(BathHouseDbContext data, IMapper mapper)
         {
             this.data = data;
+            this.mapper = mapper;
         }
 
         public string Add(string imagePath, string name, decimal price, int quantityLeft, string description)
@@ -53,13 +57,7 @@
             var accessories = accessoriesQuery
                 .Skip((currentPage - 1) * accessoriesPerPage)
                 .Take(accessoriesPerPage)
-                .Select(a => new AccessoriesAllViewModel
-                {
-                    Id = a.Id,
-                    Image = a.ImagePath,
-                    Name = a.Name,
-                    Price = a.Price,
-                })
+                .ProjectTo<AccessoriesAllViewModel>(this.mapper.ConfigurationProvider)
                 .ToList();
 
             return new AccessoriesQueryModel
@@ -96,15 +94,7 @@
         {
             var accessory = FindById(id);
 
-            var accessoryModel = new AccessoryDetailsViewModel
-            {
-                Id = accessory.Id,
-                Name = accessory.Name,
-                Description = accessory.Description,
-                Image = accessory.ImagePath,
-                Price = accessory.Price,
-                QuantityLeft = accessory.QuantityLeft
-            };
+            var accessoryModel = this.mapper.Map<AccessoryDetailsViewModel>(accessory);
 
             return accessoryModel;
         }

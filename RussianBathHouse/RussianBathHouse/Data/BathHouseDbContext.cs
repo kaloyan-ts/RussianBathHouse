@@ -30,7 +30,12 @@
                 .WithMany(c => c.Reservations)
                 .OnDelete(DeleteBehavior.Restrict);
 
-           builder.Entity<ReservationService>()
+            builder.Entity<Reservation>()
+              .HasMany(r => r.ReservationServices)
+              .WithOne(rs => rs.Reservation)
+              .OnDelete(DeleteBehavior.Cascade);
+
+            builder.Entity<ReservationService>()
                .HasKey(rs => new { rs.ServiceId, rs.ReservationId });
           
            builder.Entity<ReservationService>()
