@@ -42,7 +42,7 @@
                             </div>
                             <ul class="list-group list-group-flush">
                                 <li class="list-group-item">Number of People: @reservation.NumberOfPeople</li>
-                                <li class="list-group-item">Date of reservation: @reservation.ReservedFrom</li>
+                                <li class="list-group-item">Date of reservation: @reservation.ReservedFrom.ToString("d.MM.yyyy HH:mm")</li>
                                 <li class="list-group-item">Cabin Price: @reservation.CabinPrice</li>
                                 <li class="list-group-item">Services Price: @reservation.ServicesPrice</li>
                             </ul>

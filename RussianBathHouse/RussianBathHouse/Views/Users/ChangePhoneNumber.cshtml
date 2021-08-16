@@ -1,5 +1,9 @@
 ﻿@model PhoneNumber
 
+@{ 
+    ViewData["Title"] = "Change Phone Number";
+}
+
 <form method="POST" asp-controller="Users" asp-action="ChangePhoneNumber">
     <div class="form-group">
         <label asp-for="@Model.Data">Phone Number</label>

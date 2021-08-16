@@ -12,7 +12,7 @@
             this.ReservationServices = new HashSet<ReservationService>();
         }
 
-        public string Id { get; set; }
+        public string Id { get; set; } = Guid.NewGuid().ToString();
 
         [Required]
         public string Description { get; set; }

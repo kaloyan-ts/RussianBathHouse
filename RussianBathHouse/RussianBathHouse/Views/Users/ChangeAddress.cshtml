@@ -1,9 +1,13 @@
 ﻿@model Address
 
-<form method="POST" asp-controller="Users" asp-action="ChangeAddress">
-    <div class="form-group">
-        <label asp-for="@Model.Data">Address</label>
-        <textarea asp-for="@Model.Data" class="form-control" rows="3"></textarea>
+@{ 
+    ViewData["Title"] = "Change Address";
+}
+
+<form method="POST" class="p-5" asp-controller="Users" asp-action="ChangeAddress">
+    <div class="form-group ">
+        <label asp-for="@Model.Data">Your address:</label>
+        <textarea asp-for="@Model.Data" class="form-control" placeholder="Enter your new address" rows="3"></textarea>
         <span asp-validation-for="@Model.Data" class="small text-danger"></span>
     </div>
     <button type="submit" class="btn btn-primary">Save</button>

@@ -1,5 +1,7 @@
 ﻿@model List<AllPurchasesViewModel>
-
+@{ 
+    ViewData["Title"] = "Purchases";
+}
 
 @if (this.User.IsAdmin())
 {
@@ -31,10 +33,10 @@ else
             <tr>
                 <td scope="col">@count</td>
                 <td scope="col">@purchase.UserFullName</td>
-                <td scope="col">@purchase.DateOfPurchase</td>
+                <td scope="col">@purchase.DateOfPurchase.ToString("d.MM.yyyy HH:mm")</td>
                 <td scope="col">@purchase.AccessoryName</td>
                 <td scope="col">@purchase.Quantity</td>
-                <td scope="col">@purchase.TotalPrice</td>
+                <td scope="col">@purchase.TotalPrice $</td>
             </tr>
             count++;
         }

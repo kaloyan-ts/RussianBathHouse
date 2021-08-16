@@ -1,6 +1,10 @@
 ﻿@model BuyFormModel
 @inject IUsersService users
 
+@{ 
+    ViewData["Title"] = "Buy Accessory";
+}
+
 <div class="row">
     <div class="col-sm-12 offset-lg-2 col-lg-8 offset-xl-3 col-xl-6">
         <form method="POST" asp-action="Buy">
@@ -26,7 +30,7 @@
             }
             else
             {
-                <div>We already have your delivery data, but <a type="button" asp-controller="Users" asp-action="ChangePhoneNumber" class="btn btn-primary">Here</a> you can change your phone number and <a type="button" asp-controller="Users" asp-action="ChangeAddress" class="btn btn-primary">HERE</a> you can change your address.</div>
+        <div class="mb-5 mt-3">We already have your delivery data, but you can <a type="button" asp-controller="Users" asp-action="ChangePhoneNumber" class="btn btn-primary m-1">change your phone number</a> and you can <a type="button" asp-controller="Users" asp-action="ChangeAddress" class="btn btn-primary m-1">change your address</a></div>
             }
             @{
                 Model.PhoneNumber = phoneNumber;
