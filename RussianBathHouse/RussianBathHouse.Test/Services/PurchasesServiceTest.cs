@@ -63,20 +63,59 @@
         public void AllMethodReturnsCorrectModel()
         {
             //Arrange
-            var accID = this.accessories.Add(null, "test", 1, 0, null);
-            AddPurchase();
-            AddAnotherPurchase();
+            var firstPurchaseId = AddPurchase();
+            var secondPurchaseId = AddAnotherPurchase();
+            var accessoryId = AddAccessory();
+            AddUsers();
 
+            var firstPurchase = this.purchases.FindById(firstPurchaseId);
+            firstPurchase.AccessoryId = accessoryId;
+
+            var secondPurchase = this.purchases.FindById(secondPurchaseId);
+            secondPurchase.AccessoryId = accessoryId;
+
+            this.DbContext.SaveChanges();
             //Act
-            var purchases = this.purchases.All();
-            var purchase = purchases.First();
-            var purchaseCount = this.DbContext.Purchases.Count();
+            var result = this.purchases.All();
+            var purchase = result.First();
+            var purchaseCount = result.Count();
 
             //Assert
-            Assert.IsAssignableFrom<List<AllPurchasesViewModel>>(purchases);
+            Assert.IsAssignableFrom<List<AllPurchasesViewModel>>(result);
+            Assert.Equal(2, purchaseCount);
+            Assert.Equal("test", purchase.AccessoryName);
+            Assert.Equal("Ivan Ivanov2", purchase.UserFullName);
+            Assert.Equal(dateOfPurchase.AddDays(1), purchase.DateOfPurchase);
+            Assert.Equal(quantity, purchase.Quantity);
+            Assert.Equal(totalPrice, purchase.TotalPrice);
+        }
+
+        [Fact]
+        public void AllForUserShouldReturnCorrectDataAndModel()
+        {
+            //Arrange
+            var firstPurchaseId = AddPurchase();
+            var secondPurchaseId = AddAnotherPurchase();
+            var accessoryId = AddAccessory();
+            AddUsers();
+
+            var firstPurchase = this.purchases.FindById(firstPurchaseId);
+            firstPurchase.AccessoryId = accessoryId;
+
+            var secondPurchase = this.purchases.FindById(secondPurchaseId);
+            secondPurchase.AccessoryId = accessoryId;
+
+            this.DbContext.SaveChanges();
+            //Act
+            var result = this.purchases.AllForUser(TestUser.Identifier);
+            var purchase = result.First();
+            var purchaseCount = result.Count();
+
+            //Assert
+            Assert.IsAssignableFrom<List<AllPurchasesViewModel>>(result);
             Assert.Equal(1, purchaseCount);
             Assert.Equal("test", purchase.AccessoryName);
-            Assert.Equal(TestUser.Username, purchase.UserFullName);
+            Assert.Equal("Ivan Ivanov", purchase.UserFullName);
             Assert.Equal(dateOfPurchase, purchase.DateOfPurchase);
             Assert.Equal(quantity, purchase.Quantity);
             Assert.Equal(totalPrice, purchase.TotalPrice);
@@ -105,7 +144,7 @@
             {
                 Id = 2,
                 AccessoryId = accessoryId,
-                DateOfPurchase = dateOfPurchase,
+                DateOfPurchase = dateOfPurchase.AddDays(1),
                 Quantity = quantity,
                 TotalPrice = totalPrice,
                 UserId = "userId"
@@ -116,26 +155,50 @@
             return id;
         }
 
-        public string AddUser()
+        public string AddUsers()
         {
-
-            const string address = "address";
-            const string phoneNumber = "phoneNumber";
             const string firstName = "Ivan";
             const string lastName = "Ivanov";
 
             this.DbContext.Users.Add(new ApplicationUser
             {
                 Id = TestUser.Identifier,
-                Address = ,
-                PhoneNumber = phoneNumber,
                 FirstName = firstName,
                 LastName = lastName
+            });
+
+            this.DbContext.Users.Add(new ApplicationUser
+            {
+                Id = "userId",
+                FirstName = firstName,
+                LastName = lastName + "2"
             });
 
             this.DbContext.SaveChanges();
 
             return TestUser.Identifier;
+        }
+        private string AddAccessory()
+        {
+            const string id = "test1";
+            const string imageUrl = "https://upload.wikimedia.org/wikipedia/commons/thumb/b/b6/Image_created_with_a_mobile_phone.png/1200px-Image_created_with_a_mobile_phone.png";
+            const string name = "test";
+            const decimal price = 2;
+            const int quantityLeft = 10;
+            const string description = "description";
+
+            this.DbContext.Accessories.Add(new Accessory
+            {
+                Id = id,
+                QuantityLeft = quantityLeft,
+                Description = description,
+                ImagePath = imageUrl,
+                Name = name,
+                Price = price,
+            });
+            this.DbContext.SaveChanges();
+
+            return id;
         }
 
     }
