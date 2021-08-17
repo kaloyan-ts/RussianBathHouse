@@ -27,7 +27,9 @@
         public List<ReservationsUpcomingListModel> AllUpcoming()
         {
             var reservations = this.data.Reservations
+                //.ToList() //only when i want to test the method
                 .Where(r => r.ReservedFrom.CompareTo(DateTime.Today) > 0)
+                .OrderBy(r => r.ReservedFrom)
                 .Select(a => new ReservationsUpcomingListModel
                 {
                     ReservedFrom = a.ReservedFrom,
@@ -42,9 +44,7 @@
                     ServicesPrice = a.ReservationServices.Sum(rs => rs.Service.Price),
                     CabinPrice = a.Cabin.PricePerHour * 2
                 })
-                .OrderBy(r => r.ReservedFrom)
                 .ToList();
-
 
             return reservations;
         }

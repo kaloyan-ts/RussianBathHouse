@@ -3,13 +3,18 @@
     using Microsoft.Extensions.DependencyInjection;
     using MyTested.AspNetCore.Mvc;
     using RussianBathHouse.Data.Models;
+    using RussianBathHouse.Models.Reservations;
     using RussianBathHouse.Models.Services;
     using RussianBathHouse.Services.Reservations;
+    using RussianBathHouse.Services.Users;
     using System;
+    using System.Collections.Generic;
     using System.Linq;
     using Xunit;
     public class ReservationServiceTest : BaseTest
     {
+        private IUsersService users =>
+            this.ServiceProvider.GetRequiredService<IUsersService>();
         private IReservationsService reservations => this.ServiceProvider.GetRequiredService<IReservationsService>();
 
         private const string id = "1";
@@ -51,6 +56,80 @@
             Assert.Equal(reservedFrom, reservation.ReservedFrom);
             Assert.Equal(reservationId, reservation.Id);
         }
+
+        [Fact]
+        public void GetReservedDatesReturnsCorrectDataAndModel()
+        {
+            //Arrange
+            AddReservation();
+            AddAnotherReservation();
+
+            //Act
+            var result = reservations.GetReservedDates();
+            var reservationsCount = result.Count;
+
+            //Assert
+            Assert.Equal(2, reservationsCount);
+            Assert.IsAssignableFrom<List<ReservedDayAndHoursViewModel>>(result);
+        }
+
+        [Fact]
+        public void FindServiceByIdReturnsTheCorrectData()
+        {
+            //Arrange
+            AddService();
+
+            //Act
+            var result = this.reservations.FindServiceById(serviceId);
+
+            //Assert
+            Assert.Equal(serviceId, result.Id);
+            Assert.Equal(serviceDescription, result.Description);
+            Assert.Equal(servicePrice, result.Price);
+            Assert.IsAssignableFrom<Service>(result);
+        }
+
+        //[Fact]
+        //public void AllUpcomingShouldReturnTheCorectDataAndModel()
+        //{
+        //    //Arrange
+        //    var reservationId = AddReservation();
+        //    var userId = AddUser();
+        //    var serviceId = AddService();
+        //
+        //    var reservation = reservations.FindById(reservationId);
+        //    reservation.Cabin = new Cabin
+        //    {
+        //        PricePerHour = 10,
+        //    };
+        //    reservation.UserId = userId;
+        //
+        //    var service = new ServiceListViewModel
+        //    {
+        //        Id = serviceId,
+        //    };
+        //
+        //    var services = new ServiceListViewModel[] { service };
+        //    reservations.AddServicesToReservation(reservationId, services);
+        //
+        //    //Act
+        //    var result = this.reservations.AllUpcoming();
+        //    var reservationResult = result.First();
+        //    var reservationsCount = result.Count();
+        //
+        //    var expectedCabinsPrice = 20;
+        //    var expectedServicesPrice = 20;
+        //    var expectedUserFullName = "Ivan Ivanov";
+        //
+        //
+        //    //Assert
+        //    Assert.Equal(1, reservationsCount);
+        //    Assert.Equal(expectedCabinsPrice, reservationResult.CabinPrice);
+        //    Assert.Equal(expectedServicesPrice, reservationResult.ServicesPrice);
+        //    Assert.Equal(expectedUserFullName, reservationResult.UserFullName);
+        //    Assert.IsAssignableFrom<ReservationsUpcomingListModel>(reservationResult);
+        //    Assert.IsAssignableFrom<List<ReservationsUpcomingListModel>>(result);
+        //}
 
         [Fact]
         public void AddReservationToServiceAddsCorrectly()
@@ -348,6 +427,21 @@
 
             return id;
         }
+        private string AddAnotherReservation()
+        {
+            this.DbContext.Reservations.Add(new Reservation
+            {
+                Id = "2",
+                UserId = TestUser.Identifier,
+                CabinId = cabinId,
+                NumberOfPeople = numberOfPeople,
+                ReservedFrom = reservedFrom.AddDays(1),
+            });
+
+            this.DbContext.SaveChanges();
+
+            return id;
+        }
 
         private string AddService()
         {
@@ -361,6 +455,23 @@
             this.DbContext.SaveChanges();
 
             return id;
+        }
+
+        public string AddUser()
+        {
+            const string firstName = "Ivan";
+            const string lastName = "Ivanov";
+
+            this.DbContext.Users.Add(new ApplicationUser
+            {
+                Id = TestUser.Identifier,
+                FirstName = firstName,
+                LastName = lastName
+            });
+
+            this.DbContext.SaveChanges();
+
+            return TestUser.Identifier;
         }
 
     }

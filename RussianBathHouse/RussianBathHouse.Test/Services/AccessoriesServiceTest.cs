@@ -2,6 +2,7 @@
 {
     using Microsoft.Extensions.DependencyInjection;
     using RussianBathHouse.Data.Models;
+    using RussianBathHouse.Models.Accessories;
     using RussianBathHouse.Services.Accessories;
     using System.Linq;
     using Xunit;
@@ -16,6 +17,44 @@
         private const decimal price = 2;
         private const int quantityLeft = 10;
         private const string description = "description";
+
+        [Fact]
+        public void AllMethodReturnsTheCorectModelAndData()
+        {
+            //Arrange
+            AddAccessory();
+            AddAnotherAccessory();
+            var searchingTerm = description;
+            var sorting = AccessoriesSorting.Alphabeticaly;
+
+            //Act
+            var result = this.accessories.All(searchingTerm, sorting, 1, 2);
+
+            var firstAccessory =result.Accessories.FirstOrDefault();
+            var accessoryCount = result.TotalAccessories;
+
+            //Assert
+            Assert.Equal(2, accessoryCount);
+            Assert.Equal("a" + name, firstAccessory.Name);
+            Assert.Equal("2", firstAccessory.Id);
+            Assert.IsAssignableFrom<AccessoriesQueryModel>(result);
+        }
+
+        [Fact]
+        public void DetailsMethodShouldReturnTheCorrectModel()
+        {
+            //Arrange
+            AddAccessory();
+
+            //Act
+            var result = this.accessories.Details(id);
+
+            //Assert
+            Assert.Equal(id,result.Id);
+            Assert.Equal(name, result.Name);
+            Assert.Equal(description,result.Description);
+            Assert.IsAssignableFrom<AccessoryDetailsViewModel>(result);
+        }
 
         [Fact]
         public void AddMethodCreatesAccessory()
@@ -146,6 +185,22 @@
                 Description = description,
                 ImagePath = imageUrl,
                 Name = name,
+                Price = price
+            });
+            this.DbContext.SaveChanges();
+
+            return id;
+        }
+
+        private string AddAnotherAccessory()
+        {
+            this.DbContext.Accessories.Add(new Accessory
+            {
+                Id = "2",
+                QuantityLeft = quantityLeft,
+                Description = description,
+                ImagePath = imageUrl,
+                Name = "a" + name,
                 Price = price
             });
             this.DbContext.SaveChanges();
