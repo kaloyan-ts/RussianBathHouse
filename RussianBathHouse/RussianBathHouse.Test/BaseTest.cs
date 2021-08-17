@@ -8,10 +8,8 @@
     using RussianBathHouse.Services.Reservations;
     using RussianBathHouse.Services.Users;
     using System;
-    using AutoMapper;
     using RussianBathHouse.Data.Models;
     using Microsoft.AspNetCore.Identity;
-    using Castle.Core.Logging;
     using Microsoft.Extensions.Logging;
 
     public abstract class BaseTest

@@ -3,12 +3,8 @@
     using Microsoft.Extensions.DependencyInjection;
     using MyTested.AspNetCore.Mvc;
     using RussianBathHouse.Controllers;
-    using RussianBathHouse.Data.Models;
     using RussianBathHouse.Models.Accessories;
     using RussianBathHouse.Services.Accessories;
-    using RussianBathHouse.Test.Data;
-    using System;
-    using System.Linq;
     using Xunit;
 
     using static Data.Accessories;
@@ -68,10 +64,5 @@
        //        .View(c => c.WithModelOfType<AccessoryDetailsViewModel>());
        //}
 
-        [Fact]
-        public void GetBuyActionShouldReturnViewWithCorrectModel()
-        {
-
-        }
     }
 }
