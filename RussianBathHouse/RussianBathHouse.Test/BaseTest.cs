@@ -9,7 +9,10 @@
     using RussianBathHouse.Services.Users;
     using System;
     using AutoMapper;
-
+    using RussianBathHouse.Data.Models;
+    using Microsoft.AspNetCore.Identity;
+    using Castle.Core.Logging;
+    using Microsoft.Extensions.Logging;
 
     public abstract class BaseTest
     {
@@ -34,10 +37,21 @@
             services.AddDbContext<BathHouseDbContext>(
                 options => options.UseInMemoryDatabase(Guid.NewGuid().ToString()));
 
-           
+            services
+                 .AddIdentity<ApplicationUser, IdentityRole>(options =>
+                 {
+                     options.Password.RequireDigit = false;
+                     options.Password.RequireLowercase = false;
+                     options.Password.RequireUppercase = false;
+                     options.Password.RequireNonAlphanumeric = false;
+                     options.Password.RequiredLength = 6;
+                 })
+                 .AddEntityFrameworkStores<BathHouseDbContext>();
 
             services.AddDbContext<BathHouseDbContext>();
             services.AddAutoMapper(typeof(Startup));
+            services.AddTransient(typeof(ILogger<>), typeof(Logger<>));
+            services.AddTransient(typeof(Microsoft.Extensions.Logging.ILoggerFactory), typeof(LoggerFactory));
             services.AddTransient<IAccessoriesService, AccessoriesService>();
             services.AddTransient<IReservationsService, ReservationsService>();
             services.AddTransient<IUsersService, UsersService>();

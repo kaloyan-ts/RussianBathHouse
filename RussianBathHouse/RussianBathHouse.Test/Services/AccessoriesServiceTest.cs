@@ -9,18 +9,18 @@
     {
         private IAccessoriesService accessories => this.ServiceProvider.GetRequiredService<IAccessoriesService>();
 
+        //Arrange
+        private const string id = "test1";
+        private const string imageUrl = "https://upload.wikimedia.org/wikipedia/commons/thumb/b/b6/Image_created_with_a_mobile_phone.png/1200px-Image_created_with_a_mobile_phone.png";
+        private const string name = "test";
+        private const decimal price = 2;
+        private const int quantityLeft = 10;
+        private const string description = "description";
+
         [Fact]
         public void AddMethodCreatesAccessory()
         {
-            //Arrange
-            string imageUrl = "https://upload.wikimedia.org/wikipedia/commons/thumb/b/b6/Image_created_with_a_mobile_phone.png/1200px-Image_created_with_a_mobile_phone.png";
-            string name = "test";
-            decimal price = 2;
-            int quantityLeft = 10;
-            string description = "description";
-
             //Act
-
             this.accessories.Add(imageUrl, name, price, quantityLeft, description);
 
             var accessory = this.DbContext.Accessories.FirstOrDefault();
@@ -28,12 +28,11 @@
 
             //Assert
             Assert.Equal(1, accessoryCount);
-            Assert.Equal("description", accessory.Description);
-            Assert.Equal("test", accessory.Name);
-            Assert.Equal("https://upload.wikimedia.org/wikipedia/commons/thumb/b/b6/Image_created_with_a_mobile_phone.png/1200px-Image_created_with_a_mobile_phone.png", accessory.ImagePath);
-            Assert.Equal(10, accessory.QuantityLeft);
-            Assert.Equal(2, accessory.Price);
-            Assert.Equal(1, accessoryCount);
+            Assert.Equal(description, accessory.Description);
+            Assert.Equal(name, accessory.Name);
+            Assert.Equal(imageUrl, accessory.ImagePath);
+            Assert.Equal(quantityLeft, accessory.QuantityLeft);
+            Assert.Equal(price, accessory.Price);
         }
 
         [Fact]
@@ -94,7 +93,7 @@
             accessories.Buy(id, 5);
 
             //Assert
-            Assert.Equal(5 ,accessories.FindById(id).QuantityLeft);
+            Assert.Equal(5, accessories.FindById(id).QuantityLeft);
         }
 
         [Fact]
@@ -104,8 +103,8 @@
             var id = this.AddAccessory();
 
             //Act
-            var result = accessories.FindById("test12");
-            var expected = this.DbContext.Accessories.First(a => a.Id == "test12");
+            var result = accessories.FindById(id);
+            var expected = this.DbContext.Accessories.First(a => a.Id == id);
 
             //Assert
             Assert.Same(expected, result);
@@ -135,18 +134,11 @@
             var result = this.accessories.GetTotalPrice(id, 5);
 
             //Assert
-            Assert.Equal(10,result);
+            Assert.Equal(10, result);
         }
 
         private string AddAccessory()
         {
-            string id = "test12";
-            string imageUrl = "https://upload.wikimedia.org/wikipedia/commons/thumb/b/b6/Image_created_with_a_mobile_phone.png/1200px-Image_created_with_a_mobile_phone.png";
-            string name = "test";
-            decimal price = 2;
-            int quantityLeft = 10;
-            string description = "description";
-
             this.DbContext.Accessories.Add(new Accessory
             {
                 Id = id,
@@ -157,9 +149,8 @@
                 Price = price
             });
             this.DbContext.SaveChanges();
-            //Act
 
-            return this.accessories.Add(imageUrl, name, price, quantityLeft, description);
+            return id;
         }
     }
 }

@@ -4,7 +4,7 @@
     ViewData["Title"] = "Change Address";
 }
 
-<form method="POST" class="p-5" asp-controller="Users" asp-action="ChangeAddress">
+<form method="POST" class="p-4" asp-controller="Users" asp-action="ChangeAddress">
     <div class="form-group ">
         <label asp-for="@Model.Data">Your address:</label>
         <textarea asp-for="@Model.Data" class="form-control" placeholder="Enter your new address" rows="3"></textarea>
