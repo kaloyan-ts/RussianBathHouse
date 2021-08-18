@@ -6,7 +6,6 @@
 <a class="btn btn-success btn-block m-4" asp-controller="Reservations" asp-action="Add" role="button">Make a reservation</a>
 
 @{
-
     var maxRows = Math.Ceiling((double)Model.Count / 3);
 }
 @if (Model.Any())

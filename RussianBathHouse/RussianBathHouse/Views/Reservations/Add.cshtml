@@ -9,26 +9,26 @@
     var timeList = new List<DateTime>();
 
 
-    var today0AsDayOfWeek = @DateTime.Today.DayOfWeek;
     var today0AsDate = @DateTime.Today.Date;
+    var today0AsDayOfWeek = today0AsDate.DayOfWeek;
 
-    var today1AsDayOfWeek = @DateTime.Today.AddDays(1.0).DayOfWeek;
     var today1AsDate = @DateTime.Today.AddDays(1.0).Date;
+    var today1AsDayOfWeek = today1AsDate.DayOfWeek;
 
-    var today2AsDayOfWeek = @DateTime.Today.AddDays(2.0).DayOfWeek;
     var today2AsDate = @DateTime.Today.AddDays(2.0).Date;
+    var today2AsDayOfWeek = today2AsDate.DayOfWeek;
 
-    var today3AsDayOfWeek = @DateTime.Today.AddDays(3.0).DayOfWeek;
     var today3AsDate = @DateTime.Today.AddDays(3.0).Date;
+    var today3AsDayOfWeek = today3AsDate.DayOfWeek;
 
-    var today4AsDayOfWeek = @DateTime.Today.AddDays(4.0).DayOfWeek;
     var today4AsDate = @DateTime.Today.AddDays(4.0).Date;
+    var today4AsDayOfWeek = today4AsDate.DayOfWeek;
 
-    var today5AsDayOfWeek = @DateTime.Today.AddDays(5.0).DayOfWeek;
     var today5AsDate = @DateTime.Today.AddDays(5.0).Date;
+    var today5AsDayOfWeek = today5AsDate.DayOfWeek;
 
-    var today6AsDayOfWeek = @DateTime.Today.AddDays(6.0).DayOfWeek;
     var today6AsDate = @DateTime.Today.AddDays(6.0).Date;
+    var today6AsDayOfWeek = today6AsDate.DayOfWeek;
 
 
     var timespan0 = today0AsDate.AddHours(8.00);
@@ -212,7 +212,7 @@
                         <td class="active" id="6 + @(i)">Free</td>
                     }
                 }
-                
+
             </tr>
         </tbody>
     </table>
@@ -256,14 +256,15 @@
 
         var dateAndTime = null
         $(".active").on("click", ev => {
-            ev.preventDefault();
             ev.target.style = "background-color: #91ff80";
             ev.target.innerText = 'Reserved!';
 
             dateAndTime = ev.target.id;
+            
             returnId(dateAndTime);
+            ev.stopImmediatePropagation();
         });
-
+        
     </script>
 
     <partial name="_ValidationScriptsPartial" />

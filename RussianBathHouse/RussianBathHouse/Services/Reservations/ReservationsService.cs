@@ -68,6 +68,7 @@
                    ServicesPrice = a.ReservationServices.Sum(rs => rs.Service.Price),
                    CabinPrice = a.Cabin.PricePerHour * 2
                })
+               .OrderBy(r => r.ReservedFrom)
                .ToList();
 
             return reservations;
