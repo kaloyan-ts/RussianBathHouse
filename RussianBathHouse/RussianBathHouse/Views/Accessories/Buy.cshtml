@@ -14,8 +14,9 @@
             </h3>
             @{
                 var phoneNumber = await users.GetUserPhoneNumber(this.User.Id());
+                var address = await users.GetUserAddress(this.User.Id());
             }
-            @if (phoneNumber == null)
+            @if (phoneNumber == null && address == null)
             {
                 <div class="form-group">
                     <label asp-for="@Model.PhoneNumber">Phone Number</label>
@@ -30,7 +31,7 @@
             }
             else
             {
-        <div class="mb-5 mt-3">We already have your delivery data, but you can <a type="button" asp-controller="Users" asp-action="ChangePhoneNumber" class="btn btn-primary m-1">change your phone number</a> and you can <a type="button" asp-controller="Users" asp-action="ChangeAddress" class="btn btn-primary m-1">change your address</a></div>
+                <div class="mb-5 mt-3">We already have your delivery data, but you can <a type="button" asp-controller="Users" asp-action="ChangePhoneNumber" class="btn btn-primary m-1">change your phone number</a> and you can <a type="button" asp-controller="Users" asp-action="ChangeAddress" class="btn btn-primary m-1">change your address</a></div>
             }
             @{
                 Model.PhoneNumber = phoneNumber;
@@ -44,7 +45,8 @@
             <input asp-for="@Model.AccessoryId" type="hidden">
             <input asp-for="@Model.PhoneNumber" type="hidden">
             <input asp-for="@Model.Address" type="hidden">
-            <button type="submit" asp-action="Buy" class="btn btn-primary">Buy</button>
+            <div asp-validation-summary="ModelOnly"></div>
+            <button type="submit" asp-action="Buy" asp-controller="Accessories" class="btn btn-primary">Buy</button>
         </form>
     </div>
 </div>
